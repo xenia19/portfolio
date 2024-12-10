@@ -1,0 +1,873 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+
+  
+    margin: 0;
+    
+}
+
+html, body {
+    height: 100%;
+}
+
+
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+   background-color: #f9f9f9;
+    color: black;
+    scroll-snap-align: start;
+    min-height: 100vh;
+    width: 100%;
+   
+    flex-direction: column; /* Для корректного выравнивания содержимого */
+    justify-content: center; /* Центрирование по вертикали */
+    align-items: center; /* Центрирование по горизонтали */
+    box-sizing: border-box; /* Чтобы padding входил в высоту */
+    
+    padding: 60px 20px;
+   
+    text-align: center;
+
+  
+    scroll-snap-align: start; /* Закрепляем начало каждой секции */
+  
+}
+
+
+
+
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.skill-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.skill-item img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.skill-item span {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+}
+
+#home {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Высота на весь экран */
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+    url('img/backgr.jpg');
+    background-size: cover;
+    background-position: center;
+
+    
+}
+
+.about-paragraph {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 800px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+#home .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+   
+    z-index: 1;
+}
+
+#home .content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+}
+
+#home h1 {
+    font-size: 3em;
+    font-weight: 800;
+    letter-spacing: 3px;  font-family: 'Poppins Bold';margin: 20px 0;
+    color: #fff;
+}
+
+.iamspan {
+    color: white;  font-family: 'Roboto', sans-serif;font-size:25px; line-height: 1.5; letter-spacing: 0.8px;
+}
+
+#iam {
+    border-bottom: 1px solid #6C5C4F; color: white;  font-family: 'Roboto', sans-serif;font-size: 25px; line-height: 1.5;letter-spacing: 0.8px;
+}
+
+
+#home .text-container {
+    max-width: 600px;
+    text-align: center;
+  
+   
+}
+
+#home p {
+    font-size: 1.2em;
+    max-width: 600px;
+    line-height: 1.5;
+    color: #fff;
+}
+#about {
+    background: #f9f9f9;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Полная высота экрана */
+    text-align: center;
+    box-sizing: border-box; /* Убедимся, что padding учитывается */
+}
+
+#about .content {
+    max-width: 1200px;
+    width: 100%;
+}
+
+#about h2, .skills h2, #projects h2, .certificate-div h2, #projects-gallery h2, .contact-div h2 {
+    font-size: 1.5em; /* Увеличим шрифт */
+    margin: 20px;
+    color: #333; /* Более контрастный оттенок */
+    font-weight: bold;
+}
+
+
+
+
+
+
+#about p, .skills p, #projects p, .certificate-div p, #projects-gallery p {
+    font-size: 1.1em; /* Уменьшим шрифт для субтитров */
+    color: #333333; /* Менее насыщенный цвет */
+    max-width: 800px; /* Ограничим ширину текста */
+    margin: 0 auto 40px; /* Центрируем текст */
+    line-height: 1.6; /* Добавим межстрочного пространства */
+}
+
+
+
+.skills {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px; /* Увеличим расстояние между блоками */
+    padding: 0 20px;
+    justify-items: center;
+}
+
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fafafa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.skill-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.skill-item img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 5px;
+}
+
+.skill-item span {
+    font-size: 1em;
+    color: #444;
+}
+#about .content {
+    padding: 20px 0;
+}
+
+
+#contact {
+    background: #fff;
+   
+}
+
+.content {
+  
+    text-align: center;
+}
+
+.content-gallery {
+    height: auto;
+    text-align: center;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+#projects {
+    background: #f2f2f2;
+    padding: 20px; /* Уменьшенные отступы */
+    text-align: center;
+    height: 100vh; /* Ограничим высоту до высоты экрана */
+    display: flex; /* Flexbox для центрирования содержимого */
+    flex-direction: column;
+    justify-content: center; /* Центрируем вертикально */
+  
+    box-sizing: border-box; /* Учитываем padding в высоту */
+}
+
+
+
+.gallery-item:hover {
+    transform: scale(1.05); /* Увеличение карточки при наведении */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+#projects-gallery {
+    background-color: #f9f9f9;
+    padding: 10px;
+    text-align: center;
+    height: 100vh; /* Высота секции — весь экран */
+    display: flex;
+    flex-direction: column; /* Вертикальное выравнивание контента */
+    justify-content: space-between; /* Равномерное распределение */
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.gallery {
+    display: grid;
+    margin-top: 40px;
+    grid-template-columns: repeat(2, 1fr); /* Две карточки в строку */
+    grid-column-gap: 130px; /* Расстояние между карточками */
+    grid-row-gap: 50px;
+    width: 100%; /* Галерея растягивается на всю ширину */
+    max-width: 1200px; /* Максимальная ширина галереи */
+    height: 56%; /* Высота галереи относительно секции */
+}
+
+.gallery-item {
+    position: relative;
+    width: 100%; /* Карточка растягивается в рамках сетки */
+    height: 100%; /* Карточка заполняет всю высоту строки */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden; /* Убираем лишнее содержимое */
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Пропорциональное заполнение */
+    border-radius: 8px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный фон */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.gallery-item:hover .overlay {
+    opacity: 1; /* Показываем описание при наведении */
+}
+
+.description {
+    color: #fff;
+    font-size: 1em;
+    text-align: center;
+    padding: 10px;
+    max-width: 90%;
+}
+
+
+.link-gallery {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+
+.overlay .description {
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+.gallery-item:hover .overlay {
+    opacity: 1;
+}
+
+.link-gallery {
+    color: #fff
+}
+
+
+.fa-brands, .fa-solid {
+    font-size: 25px;
+}
+
+#education {
+    background: #f9f9f9;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+
+#section1 h2 {
+    font-size: 2em;
+    margin-bottom: 40px;
+    color: #444;
+}
+
+.ibm img {
+    width: 250px;
+    height: 100px;
+    margin-bottom: 10px;
+    
+}
+
+.certification-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.section-certification {
+    display: flex;
+    flex-direction: column; /* Вертикальное выравнивание */
+    justify-content: space-between; /* Разделение пространства между блоками */
+    align-items: center;
+    height: 100vh; /* Высота секции — весь экран */
+    padding: 20px; /* Внутренние отступы */
+    box-sizing: border-box; /* Учитываем padding в высоте */
+    background-color: #f9f9f9;
+}
+
+.certificate-div {
+    flex: 1; /* Занимает равное пространство */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-div {
+    flex: 0.5; /* Контактный блок занимает меньше пространства */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.education-certifications {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr ;/* Удобно для адаптации */
+    gap: 20px;
+    justify-items: center;
+  background-color: #f9f9f9;
+    width: 100%;
+    max-width: 1200px;
+}
+.certification-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Центрируем контент */
+    text-decoration: none;
+    color: #444;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 200px; /* Фиксированная ширина для всех карточек */
+    height: 250px; /* Фиксированная высота для всех карточек */
+    
+
+}
+.certification-item img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+    object-fit: contain; /* Убедитесь, что изображение сохраняет пропорции */
+}
+
+.contact-items {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.contact-items a {
+    font-size: 24px;
+    color: #444;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.contact-items a:hover {
+    transform: scale(1.1);
+    color: #0073e6;
+}
+
+@media (max-width: 768px) {
+    /* Общие стили для секций */
+    .section, #home, #projects, #about, #projects-gallery, .certificate-div, .contact-div {
+        height: auto; /* Убираем фиксированную высоту */
+        padding: 20px; /* Увеличиваем внутренние отступы */
+        box-sizing: border-box;
+    }
+
+    /* Карточки сертификатов */
+    .certification-item {
+        width: 150px; /* Фиксированная ширина для всех карточек */
+        height: 200px; /* Фиксированная высота для всех карточек */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box; /* Учитываем отступы */
+    }
+
+    .certification-item img {
+        width: 80px; /* Фиксированный размер изображений */
+        height: 80px;
+        object-fit: contain; /* Сохраняем пропорции изображений */
+        margin-bottom: 5px;
+    }
+
+    .certification-item span {
+        font-size: 0.9em; /* Уменьшаем размер текста */
+        text-align: center;
+    }
+
+    .education-certifications {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Две колонки в строку */
+        gap: 15px; /* Уменьшаем расстояние между карточками */
+        justify-items: center;
+        width: 100%; /* Растягиваем на всю ширину */
+        max-width: 100%; /* Убираем ограничение по ширине */
+        padding: 10px; /* Добавляем внутренние отступы */
+    }
+
+    
+    /* Контактная секция */
+    .contact-div {
+       
+        padding: 20px; /* Добавляем отступы */
+        overflow: visible; /* Убираем ограничения прокрутки */
+        height: -webkit-fill-available;
+        min-height: 100%; /* Минимальная высота для секций */
+        
+        overflow: visible; /* Убираем ограничения прокрутки */
+        box-sizing: border-box; /* Учитываем отступы */
+    }
+
+    .contact-items {
+        display: flex;
+        flex-wrap: wrap; /* Иконки в несколько строк */
+        justify-content: center;
+        gap: 15px; /* Увеличиваем расстояние между иконками */
+    }
+
+    .contact-items a {
+        font-size: 20px; /* Уменьшаем размер иконок */
+    }
+
+    .contact-div h2 {
+        font-size: 1.4em; /* Уменьшаем размер заголовка */
+        margin-bottom: 15px; /* Добавляем отступы */
+    }
+
+    /* Галерея проектов */
+    .gallery {
+        grid-template-columns: 1fr; /* Один проект в строке */
+        gap: 20px; /* Расстояние между карточками */
+    }
+
+    .gallery-item {
+        height: auto; /* Убираем фиксированную высоту */
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: auto; /* Масштабируем изображение */
+        object-fit: cover;
+    }
+
+    .gallery-item .overlay {
+        font-size: 0.9em; /* Уменьшаем текст в описании */
+        padding: 10px;
+    }
+
+    /* Сетка навыков */
+    .skills {
+        grid-template-columns: 1fr 1fr; /* Два элемента в строке */
+        gap: 10px; /* Расстояние между элементами */
+    }
+
+    .skill-item {
+        padding: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .skill-item img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .skill-item span {
+        font-size: 0.9em; /* Уменьшаем текст */
+    }
+
+    /* Текстовые секции */
+    #about h2, .skills h2, #projects h2, .certificate-div h2, #projects-gallery h2, .contact-div h2{
+        font-size: 1.2em; /* Уменьшаем размер заголовков */
+    }
+
+
+
+    /* Общие настройки для текста */
+    body {
+        font-size: 14px; /* Уменьшаем общий размер шрифта */
+        line-height: 1.5; /* Добавляем межстрочное расстояние */
+    
+    }
+}
+
+
+/* Для мобильных устройств */
+@media (max-width: 768px) {
+
+
+
+    #home h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+        color: #fff;
+    }
+
+    .iamspan {
+        color: white;  font-family: 'Roboto', sans-serif;font-size:1.3em; line-height: 1.5; letter-spacing: 0.8px;
+    }
+    
+    #iam {
+        border-bottom: 1px solid #6C5C4F; color: white;  font-family: 'Roboto', sans-serif;font-size: 1.3em; line-height: 1.5;letter-spacing: 0.8px;
+    }
+    
+
+
+
+    .section, #home, #projects, #about, #projects-gallery, .certificate-div, .contact-div {
+        height: auto; /* Убираем фиксированную высоту для всех секций */
+        min-height: 100%; /* Обеспечиваем минимум достаточной высоты */
+        overflow: visible; /* Убираем возможное обрезание контента */
+    }
+
+    .gallery, .education-certifications, .contact-items {
+        overflow: visible; /* Убедимся, что контент не обрезается */
+    }
+
+    #about p, .skills p, #projects p, .certificate-div p, #projects-gallery p {
+        font-size: 1em; /* Уменьшим шрифт для субтитров */
+        color: #333333; /* Менее насыщенный цвет */
+        max-width: 360px; /* Ограничим ширину текста */
+        margin: 0 auto 40px; /* Центрируем текст */
+        line-height: 1.6; /* Добавим межстрочного пространства */
+    }
+}
+/* Общий адаптивный стиль для 1280x800, 810x1080, 1024x1366 */
+
+@media (max-width: 1280px) {
+    .education-certifications {
+        grid-template-columns: repeat(3, 1fr); /* Три карточки в строку */
+        gap: 20px; /* Расстояние между карточками */
+    }
+
+    .skills {
+        grid-template-columns: repeat(4, 1fr); /* Четыре иконки в строку */
+        gap: 20px; /* Увеличиваем расстояние */
+    }
+
+    .section {
+        padding: 40px 20px; /* Уменьшаем отступы */
+    }
+}
+
+@media (max-width: 1080px) {
+    .education-certifications {
+        grid-template-columns: repeat(2, 1fr); /* Две карточки в строку */
+        gap: 15px; /* Уменьшаем расстояние между карточками */
+    }
+
+    .skills {
+        grid-template-columns: repeat(3, 1fr); /* Три иконки в строку */
+        gap: 15px; /* Уменьшаем расстояние */
+    }
+
+    .gallery {
+        grid-template-columns: 1fr; /* Один проект в строке */
+        gap: 20px; /* Расстояние между проектами */
+    }
+
+    .section {
+        padding: 30px 15px; /* Уменьшаем отступы */
+    }
+
+    .section h2 {
+        font-size: 1.5em; /* Уменьшаем размер заголовков */
+    }
+
+    .contact-div {
+        padding: 20px; /* Уменьшаем отступы */
+    }
+}
+
+@media (max-width: 1366px) {
+    .education-certifications {
+        grid-template-columns: repeat(4, 1fr); /* Четыре карточки в строку */
+        gap: 20px; /* Расстояние между карточками */
+    }
+
+    .skills {
+        grid-template-columns: repeat(4, 1fr); /* Четыре иконки в строку */
+        gap: 20px; /* Расстояние между иконками */
+    }
+
+    .gallery {
+        grid-template-columns: repeat(2, 1fr); /* Два проекта в строке */
+        gap: 25px; /* Расстояние между проектами */
+    }
+
+    .section {
+        padding: 50px 25px; /* Увеличиваем отступы */
+    }
+}
+
+/* Убираем лишнее пустое место */
+.section {
+    min-height: 90vh; /* Гарантируем минимальную высоту */
+}
+
+.contact-div, .gallery {
+    margin-bottom: 0; /* Убираем лишние отступы */
+}
+
+.education-certifications, .skills {
+    justify-content: center; /* Центрируем контент */
+}
+@media (max-width: 810px) {
+    /* Education Certifications */
+    .education-certifications {
+        grid-template-columns: 1fr 1fr; /* Две карточки в строку */
+        gap: 15px; /* Уменьшаем расстояние между карточками */
+        justify-content: center; /* Центрируем карточки */
+    }
+
+    .certification-item {
+        width: 160px; /* Уменьшаем ширину карточек */
+        height: 200px; /* Уменьшаем высоту карточек */
+    }
+
+    .certification-item img {
+        width: 80px; /* Уменьшаем размер логотипов */
+        height: 80px;
+    }
+
+    .certification-item span {
+        font-size: 0.9em; /* Уменьшаем размер текста */
+        text-align: center;
+    }
+
+    /* Contact Section */
+    .contact-div {
+        padding: 20px; /* Увеличиваем отступы для лучшего отображения */
+    }
+
+    .contact-items {
+        flex-wrap: wrap; /* Перенос иконок на новую строку при необходимости */
+        justify-content: center; /* Центрируем иконки */
+        gap: 10px; /* Уменьшаем расстояние между иконками */
+    }
+
+    .contact-items a {
+        font-size: 22px; /* Уменьшаем размер иконок */
+    }
+
+    /* General Section Adjustment */
+    .section {
+        padding: 30px 15px; /* Уменьшаем внутренние отступы */
+    }
+
+    .section h2 {
+        font-size: 1.4em; /* Уменьшаем размер заголовков */
+    }
+}
+
+
+
+
+
+@media (max-width: 430px) {
+    /* Общая настройка секций */
+    .section {
+        padding: 20px 10px; /* Уменьшаем внутренние отступы */
+        margin-top: 0; /* Убираем возможные внешние отступы */
+    }
+
+    /* Заголовки секций */
+    .section h2 {
+        font-size: 1.3em; /* Уменьшаем размер заголовков */
+        margin-bottom: 10px; /* Уменьшаем нижний отступ */
+    }
+
+    /* Текст в секциях */
+    .section p {
+        font-size: 0.9em; /* Уменьшаем размер шрифта для параграфов */
+        line-height: 1.4; /* Уменьшаем межстрочное расстояние */
+        margin: 10px 0; /* Уменьшаем отступы между текстом */
+    }
+
+    /* Сертификаты */
+    .education-certifications {
+        grid-template-columns: 1fr 1fr; /* Один элемент на строку */
+        gap: 10px; /* Уменьшаем расстояние между карточками */
+    }
+
+    .certification-item {
+        width: 140px; /* Уменьшаем ширину карточки */
+        height: 180px; /* Уменьшаем высоту карточки */
+    }
+
+    .certification-item img {
+        width: 50px; /* Уменьшаем логотип */
+        height: 50px;
+    }
+
+
+    
+    /* Контактная секция */
+    .contact-div {
+        margin-top: 10px; /* Уменьшаем отступ сверху */
+        padding: 10px; /* Уменьшаем внутренний отступ */
+    }
+
+    .contact-items {
+        flex-wrap: wrap; /* Перенос иконок */
+        gap: 10px; /* Уменьшаем расстояние между иконками */
+    }
+
+    /* Навыки */
+    .skills {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Компактная сетка навыков */
+        gap: 10px; /* Уменьшаем расстояние между элементами */
+    }
+
+    .skill-item {
+        padding: 10px; /* Уменьшаем внутренние отступы */
+    }
+
+    .skill-item img {
+        width: 50px; /* Уменьшаем размер иконок */
+        height: 50px;
+    }
+
+    .skill-item span {
+        font-size: 0.8em; /* Уменьшаем текст */
+    }
+
+    /* Галерея проектов */
+    .gallery {
+        grid-template-columns: 1fr; /* Один проект в строку */
+        gap: 10px; /* Уменьшаем расстояние между карточками */
+    }
+
+    .gallery-item {
+        height: auto; /* Автоматическая высота */
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .gallery-item img {
+        width: 100%; /* Масштабируем изображение */
+        height: auto; 
+    }
+}
