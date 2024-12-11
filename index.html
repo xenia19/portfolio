@@ -36,7 +36,7 @@
             <p>
                 Hi, I’m Xenia, a front-end developer with a passion for creating beautiful and user-friendly digital experiences. 
                 I blend creativity with technical expertise in <strong>React</strong>, <strong>JavaScript</strong>, and <strong>REST APIs</strong> to bring ideas to life.
-                I’m hardworking and love a good challenge, always striving to learn and grow.<br> Fluent in <strong>English</strong>, 
+                I’m hardworking and love a good challenge, always striving to learn and grow.<br><br> Fluent in <strong>English</strong>, 
                 <strong>Spanish</strong>, <strong>Italian</strong>, and <strong>Russian</strong>. 
             </p>
            
@@ -195,7 +195,6 @@
     </div>
 
 
-<script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     new TypeIt('#iam', {
@@ -222,29 +221,10 @@
       $grid.isotope('layout');
     });  
 
-    document.addEventListener("DOMContentLoaded", function () {
-            const sections = document.querySelectorAll(".section"); // Все секции
-            let currentIndex = 0;
 
-            function autoScroll() {
-                // Прокрутка к текущей секции
-                sections[currentIndex].scrollIntoView({
-                    behavior: "smooth", // Плавная прокрутка
-                });
-
-                // Увеличиваем индекс или возвращаем к первой секции
-                currentIndex = (currentIndex + 1) % sections.length;
-
-                // Повторяем через 3 секунды
-                setTimeout(autoScroll, 3000);
-            }
-
-            autoScroll(); // Запуск автоматической прокрутки
-        });
     </script>
 
-
-<script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeit/6.0.3/typeit.min.js"></script>
 </body>
 
 </html>
