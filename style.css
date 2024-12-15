@@ -812,6 +812,14 @@ nav ul li a:hover {
 
 @media (max-width: 440px) {
 
+    #iam {
+        font-size: 22px;
+    }
+    
+    .iamspan {
+        font-size: 22px;
+    }
+
     /* Общая настройка секций */
     .section {
         padding: 20px 10px; /* Уменьшаем внутренние отступы */
@@ -872,7 +880,7 @@ background-position: center;
     /* Навыки */
     .skills {
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Компактная сетка навыков */
-        gap: 10px; /* Уменьшаем расстояние между элементами */
+        gap: 20px; /* Уменьшаем расстояние между элементами */
     }
 
     .skill-item {
