@@ -587,7 +587,7 @@ nav ul li a:hover {
 
     .gallery-item img {
        
-        height: auto; /* Масштабируем изображение */
+       
         object-fit: cover;
     }
 
@@ -912,7 +912,7 @@ background-position: center;
 
     .gallery-item img {
         width: 100%; /* Масштабируем изображение */
-        height: auto; 
+      
     }
 }
 @media (min-width: 1600px)  {
