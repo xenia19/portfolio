@@ -1,4 +1,4 @@
- **Portfolio — Personal Developer Portfolio Website**
+ **Portfolio**
 
 A modern, responsive portfolio website built to showcase my projects, skills, and experience. Designed with a clean UI, smooth animations, and clear structure so employers can easily explore my work.
 
