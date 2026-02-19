@@ -6,6 +6,14 @@ import {
   Cpu, Layout, Database, PlayCircle, Server 
 } from 'lucide-react';
 
+// === ВАЖНЫЕ ИМПОРТЫ КАРТИНОК И ВИДЕО ===
+// Убедись, что эти файлы реально лежат в папке src/assets/ и src/assets/img/
+import profileImg from './assets/profile.jpg';
+import mobileAppImg from './assets/mobile-app.png';
+import passportVideo from './assets/img/passport-demo.mp4';
+import voiceAppImg from './assets/voice-app.png';
+import bookingVideo from './assets/img/booking.mp4';
+
 // --- ДАННЫЕ ПРОЕКТОВ ---
 const projects = [
   {
@@ -15,25 +23,20 @@ const projects = [
     badge: "10k+ Downloads",
     description: "A self-hypnosis app aiding 10,000+ users. Features offline-first architecture, AI voice synthesis via ElevenLabs, and monetized via RevenueCat.",
     tech: ["React Native", "Redux Persist", "Firebase", "RevenueCat", "ElevenLabs API"],
-    // Это картинка (JPG), код сам поймет и отрисует <img>
-    image: "/img/mobile-app.png", 
+    image: mobileAppImg, // ИСПОЛЬЗУЕМ ПЕРЕМЕННУЮ
     link: "https://play.google.com/store/apps/details?id=com.voiceapp.voice", 
     github: null 
   },
-{
+  {
     id: 2,
-    // НОВОЕ НАЗВАНИЕ
     title: "The Spanish LXP: Immersion Quest",
-    // НОВАЯ КАТЕГОРИЯ (Звучит очень круто)
     category: "Gamified Learning Experience Platform (LXP)",
     badge: "AI Powered Tutor",
-    // НОВОЕ ОПИСАНИЕ (Основано на твоем тексте про метафору)
     description: "An immersive LXP replacing boring lists with a 'Travel Metaphor'. Students earn 'Visas' instead of grades, unlocking a 'Boarding Pass' for missions. Features an AI-Tutor that explains mistakes using natural slang, and a 'Consulado' admin panel for real-time monitoring.",
     tech: ["React", "DeepSeek AI", "Tailwind CSS", "Firestore", "Advanced Gamification"],
-    image: "/img/passport-demo.mp4", 
+    image: passportVideo, // ИСПОЛЬЗУЕМ ПЕРЕМЕННУЮ
     link: "https://clases-con-xenia.com/app/",
     github: "https://github.com/xenia19/spanish-lxp-immersion"
-    
   },
   {
     id: 3,
@@ -42,9 +45,8 @@ const projects = [
     badge: "Engineering Demo",
     description: "Voice journaling app with a custom Python backend for speech-to-text. Solved Android 13+ permission issues and implemented reliable file uploads.",
     tech: ["React Native", "Python (Flask)", "Vosk API", "File System", "Render"],
-    // Тут тоже может быть видео или картинка
-    image: "/img/voice-app.png", 
-   link: null,
+    image: voiceAppImg, // ИСПОЛЬЗУЕМ ПЕРЕМЕННУЮ
+    link: null,
     github: "https://github.com/xenia19/voice-journal"
   },
   {
@@ -54,10 +56,9 @@ const projects = [
     badge: "Live Product",
     description: "Automated scheduling system. Syncs bookings with Google Calendar API and sends automated email reminders via Node.js scripts & Sendinblue.",
     tech: ["React", "Firebase Auth", "Google Calendar API", "Sendinblue API", "GitHub Actions"],
-    // И тут ставим видео MP4 вместо гифки
-    image: "/img/booking.mp4", 
+    image: bookingVideo, // ИСПОЛЬЗУЕМ ПЕРЕМЕННУЮ
     link: "https://clases-con-xenia.com/",
-  
+    github: null // добавил github: null, чтобы кнопка Code не ломалась, если ссылки нет
   }
 ];
 
@@ -94,14 +95,18 @@ const certificates = [
   { 
     name: "Bachelor in Psychology", 
     issuer: "University Degree", 
-    
   }
 ];
 
 const App = () => {
   // Функция для проверки, видео это или картинка
-  const isVideo = (fileName) => {
-    return fileName.endsWith('.mp4') || fileName.endsWith('.webm');
+  const isVideo = (fileData) => {
+    // Поскольку после импорта Vite это уже не строка с .mp4, а специальный объект/строка с хешем,
+    // надежнее всего проверять, содержит ли URL ".mp4" или ".webm"
+    if (typeof fileData === 'string') {
+        return fileData.includes('.mp4') || fileData.includes('.webm');
+    }
+    return false;
   };
 
   return (
@@ -171,7 +176,7 @@ const App = () => {
           >
             <div className="relative w-72 h-72 lg:w-96 lg:h-96">
               <img 
-                src="/img/profile.jpg" 
+                src={profileImg} // ИСПОЛЬЗУЕМ ПЕРЕМЕННУЮ
                 alt="Xenia" 
                 className="relative w-full h-full object-cover rounded-[2rem] shadow-2xl z-10 rotate-3 hover:rotate-0 transition duration-500"
               />
@@ -225,7 +230,6 @@ const App = () => {
       </section>
 
       {/* --- PROJECTS SECTION --- */}
-{/* --- PROJECTS SECTION --- */}
       <section id="projects" className="py-24 bg-slate-50">
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="text-center mb-20">
@@ -247,20 +251,18 @@ const App = () => {
               >
                 {/* MEDIA CONTAINER */}
                 <a 
-                  href={project.link} 
-                  target="_blank" 
+                  href={project.link || "#"} 
+                  target={project.link ? "_blank" : "_self"} 
                   rel="noreferrer"
-                  className="flex-1 w-full group perspective-1000 block"
+                  className={`flex-1 w-full group perspective-1000 block ${!project.link && 'cursor-default'}`}
                 >
-                  <div className={`relative overflow-hidden rounded-2xl shadow-2xl border-4 border-white bg-slate-100 cursor-pointer transform group-hover:rotate-1 transition duration-500 ${
-                    // УСЛОВИЕ: Если это мобильное приложение -> делаем квадратнее (4/3) и contain
-                    // Если веб -> делаем широким (video) и cover
+                  <div className={`relative overflow-hidden rounded-2xl shadow-2xl border-4 border-white bg-slate-100 transform ${project.link && 'group-hover:rotate-1 cursor-pointer'} transition duration-500 ${
                     project.category.includes("Mobile") || project.category.includes("RN") 
                       ? "aspect-[4/3]" 
                       : "aspect-video"
                   }`}>
                     
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition z-10"></div>
+                    <div className={`absolute inset-0 bg-black/0 ${project.link && 'group-hover:bg-black/5'} transition z-10`}></div>
                     
                     {isVideo(project.image) ? (
                       <video 
@@ -276,7 +278,6 @@ const App = () => {
                         src={project.image} 
                         onError={(e) => {e.target.style.display='none'}}
                         alt={project.title} 
-                        // Для мобилок используем object-contain, чтобы видно было весь телефон целиком
                         className={`w-full h-full ${
                            project.category.includes("Mobile") || project.category.includes("RN") 
                            ? "object-contain p-4 bg-indigo-50" 
@@ -289,7 +290,6 @@ const App = () => {
 
                 {/* PROJECT INFO */}
                 <div className="flex-1 space-y-6">
-                   {/* ... (остальной код текста без изменений) ... */}
                   <div className="flex items-center gap-3">
                      <span className="px-3 py-1 text-xs font-bold text-indigo-600 bg-indigo-50 rounded-full uppercase tracking-wider">
                        {project.category}
@@ -314,8 +314,8 @@ const App = () => {
                     ))}
                   </div>
 
-<div className="flex gap-4 pt-6">
-                    {/* КНОПКА LIVE DEMO / GOOGLE PLAY (Показывается только если есть link) */}
+                  <div className="flex gap-4 pt-6">
+                    {/* КНОПКА LIVE DEMO / GOOGLE PLAY */}
                     {project.link && (
                       <a href={project.link} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-lg font-bold hover:bg-indigo-700 transition shadow-lg shadow-indigo-200">
                         {project.category.includes("Mobile") ? <PlayCircle size={20} /> : <ExternalLink size={20} />} 
@@ -323,7 +323,7 @@ const App = () => {
                       </a>
                     )}
                     
-                    {/* КНОПКА CODE (Показывается только если есть github) */}
+                    {/* КНОПКА CODE */}
                     {project.github && (
                         <a href={project.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 bg-white text-slate-700 border border-slate-200 rounded-lg font-bold hover:bg-slate-50 transition">
                         <Github size={20} /> Code
@@ -336,6 +336,7 @@ const App = () => {
           </div>
         </div>
       </section>
+
       {/* --- LANGUAGES & EDUCATION --- */}
       <section className="py-24 bg-white border-t border-slate-200">
         <div className="container mx-auto px-6 max-w-4xl">
@@ -356,7 +357,6 @@ const App = () => {
                 </div>
 
                 {/* Certificates */}
-{/* Certificates */}
                 <div>
                     <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
                         <Award className="text-indigo-600"/> Education
@@ -364,7 +364,6 @@ const App = () => {
                     <div className="space-y-4">
                         {certificates.map((cert, i) => (
                             cert.link ? (
-                                /* Если есть ссылка - рендерим как кликабельную карточку */
                                 <a 
                                     href={cert.link}
                                     key={i}
@@ -375,7 +374,6 @@ const App = () => {
                                     <p className="text-sm text-slate-500 mt-1">{cert.issuer}</p>
                                 </a>
                             ) : (
-                                /* Если ссылки НЕТ - рендерим как обычный текст без hover-эффектов */
                                 <div 
                                     key={i}
                                     className="block p-4 border border-slate-100 rounded-xl bg-white"
