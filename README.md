@@ -1,16 +1,23 @@
-# React + Vite
+# 👩‍💻 Frontend Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![React](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-Fast_Build-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 
-Currently, two official plugins are available:
+> A modern, responsive personal portfolio website designed to showcase my engineering projects, skills, and background in psychology.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 🌐 Live Demo
+**[xenia19.github.io/portfolio](https://xenia19.github.io/portfolio/)**
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 About the Project
+This project serves as my digital resume and project showcase. I built it from scratch focusing on clean UI, smooth animations, and responsive design across all devices. 
 
-## Expanding the ESLint configuration
+It highlights my transition from a Psychology background to Full-stack & Mobile Development, featuring commercial apps, SaaS products, and AI integrations.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+* **Framework:** React (Vite)
+* **Styling:** Tailwind CSS
+* **Icons:** Lucide React
+* **Deployment:** GitHub Pages (Automated via `gh-pages`)
