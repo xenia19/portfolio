@@ -6,16 +6,28 @@ import {
   Cpu, Layout, Database, PlayCircle, Server 
 } from 'lucide-react';
 
-// === ВАЖНЫЕ ИМПОРТЫ КАРТИНОК И ВИДЕО ===
-// Убедись, что эти файлы реально лежат в папке src/assets/ и src/assets/img/
+// === ИМПОРТЫ ===
 import profileImg from './assets/profile.jpg';
-import mobileAppImg from './assets/mobile-app.png';
+import mobileAppImg from './assets/mobile-app.jpg';
 import passportVideo from './assets/img/passport-demo.mp4';
-import voiceAppImg from './assets/voice-app.png';
+import voiceAppImg from './assets/voice-app.jpg';
 import bookingVideo from './assets/img/booking.mp4';
+import tranquiloVideo from './assets/img/Tranquilo.mp4'; // ← ДОБАВЬ ВИДЕО
 
 // --- ДАННЫЕ ПРОЕКТОВ ---
 const projects = [
+  {
+    id: 0,
+    title: "Tranquilo.Quest",
+    category: "Gamified Learning Platform (PWA)",
+    badge: "10 Game Engines",
+    description: "AI-powered platform for learning survival Spanish. 10 custom game engines — from roleplay dialogs with DeepSeek AI feedback to audio comprehension and narrative quests with persistent NPCs. Gamified progression with XP, coins, and achievements.",
+  image: tranquiloVideo,
+  tech: ["React", "DeepSeek AI", "PWA", "Gamification"],
+    link: "https://tranquilo.quest/",
+    github: "https://github.com/xenia19/tranquilo-quest",
+    isVertical: true
+  },
   {
     id: 1,
     title: "Positive Audio Affirmations",
@@ -23,7 +35,7 @@ const projects = [
     badge: "10k+ Downloads",
     description: "A self-hypnosis app aiding 10,000+ users. Features offline-first architecture, AI voice synthesis via ElevenLabs, and monetized via RevenueCat.",
     tech: ["React Native", "Redux Persist", "Firebase", "RevenueCat", "ElevenLabs API"],
-    image: mobileAppImg, // ИСПОЛЬЗУЕМ ПЕРЕМЕННУЮ
+    image: mobileAppImg,
     link: "https://play.google.com/store/apps/details?id=com.voiceapp.voice", 
     github: null 
   },
@@ -33,33 +45,33 @@ const projects = [
     category: "Gamified Learning Experience Platform (LXP)",
     badge: "AI Powered Tutor",
     description: "An immersive LXP replacing boring lists with a 'Travel Metaphor'. Students earn 'Visas' instead of grades, unlocking a 'Boarding Pass' for missions. Features an AI-Tutor that explains mistakes using natural slang, and a 'Consulado' admin panel for real-time monitoring.",
-    tech: ["React", "DeepSeek AI", "Tailwind CSS", "Firestore", "Advanced Gamification"],
-    image: passportVideo, // ИСПОЛЬЗУЕМ ПЕРЕМЕННУЮ
+    tech: ["React", "DeepSeek AI", "CSS", "Firestore", "Advanced Gamification"],
+    image: passportVideo,
     link: "https://clases-con-xenia.com/app/",
     github: "https://github.com/xenia19/spanish-lxp-immersion"
   },
   {
     id: 3,
-    title: "Voice Journal & Transcriber",
-    category: "Full-Stack (RN + Python)",
-    badge: "Engineering Demo",
-    description: "Voice journaling app with a custom Python backend for speech-to-text. Solved Android 13+ permission issues and implemented reliable file uploads.",
-    tech: ["React Native", "Python (Flask)", "Vosk API", "File System", "Render"],
-    image: voiceAppImg, // ИСПОЛЬЗУЕМ ПЕРЕМЕННУЮ
-    link: null,
-    github: "https://github.com/xenia19/voice-journal"
-  },
-  {
-    id: 4,
     title: "Tutor Booking SaaS",
     category: "Full-stack Web App",
     badge: "Live Product",
     description: "Automated scheduling system. Syncs bookings with Google Calendar API and sends automated email reminders via Node.js scripts & Sendinblue.",
     tech: ["React", "Firebase Auth", "Google Calendar API", "Sendinblue API", "GitHub Actions"],
-    image: bookingVideo, // ИСПОЛЬЗУЕМ ПЕРЕМЕННУЮ
+    image: bookingVideo,
     link: "https://clases-con-xenia.com/",
-    github: null // добавил github: null, чтобы кнопка Code не ломалась, если ссылки нет
-  }
+    github: null
+  },
+  {
+    id: 4,
+    title: "Voice Journal & Transcriber",
+    category: "Full-Stack (RN + Python)",
+    badge: "Engineering Demo",
+    description: "Voice journaling app with a custom Python backend for speech-to-text. Solved Android 13+ permission issues and implemented reliable file uploads.",
+    tech: ["React Native", "Python (Flask)", "Vosk API", "File System", "Render"],
+    image: voiceAppImg,
+    link: "https://play.google.com/store/apps/details?id=com.voicejournal",
+    github: "https://github.com/xenia19/voice-journal"
+  },
 ];
 
 // --- НАВЫКИ ---
@@ -72,7 +84,7 @@ const skills = [
   { 
     icon: <Layout size={24} />, 
     title: "Frontend Core", 
-    desc: "React 19, JavaScript (ES6+), Tailwind CSS, Framer Motion, UX/UI Psychology." 
+    desc: "React 19, JavaScript (ES6+), HTML/CSS, UX/UI Psychology." 
   },
   { 
     icon: <Server size={24} />, 
@@ -99,10 +111,7 @@ const certificates = [
 ];
 
 const App = () => {
-  // Функция для проверки, видео это или картинка
   const isVideo = (fileData) => {
-    // Поскольку после импорта Vite это уже не строка с .mp4, а специальный объект/строка с хешем,
-    // надежнее всего проверять, содержит ли URL ".mp4" или ".webm"
     if (typeof fileData === 'string') {
         return fileData.includes('.mp4') || fileData.includes('.webm');
     }
@@ -114,13 +123,11 @@ const App = () => {
       
       {/* --- HERO SECTION --- */}
       <header className="relative min-h-screen flex items-center justify-center pt-20 pb-20 px-6 overflow-hidden">
-        {/* Background Gradients */}
         <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
         <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
 
         <div className="container mx-auto max-w-6xl grid lg:grid-cols-2 gap-16 items-center relative z-10">
           
-          {/* Left: Text */}
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -128,7 +135,7 @@ const App = () => {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 text-sm font-bold tracking-widest text-indigo-700 uppercase bg-indigo-50 border border-indigo-100 rounded-full">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-              Product-Minded Developer
+              React & React Native Developer
             </div>
             
             <h1 className="text-5xl lg:text-7xl font-extrabold text-slate-900 mb-6 leading-[1.1]">
@@ -137,23 +144,28 @@ const App = () => {
             </h1>
             
             <p className="text-xl text-slate-600 mb-8 leading-relaxed max-w-lg">
-              Hi, I'm <b>Xenia</b>. A Frontend & Mobile Developer with a background in Psychology. 
-              I created a mobile app with <b className="text-slate-900">10k+ downloads</b> and an AI-powered EdTech platform.
+              Hi, I'm <b>Xenia</b>. A React & Mobile Developer. 
+              I created a mobile app with <b className="text-slate-900">10k+ downloads</b> and 
+              an AI-powered learning platform with <b className="text-slate-900">10 game engines</b>.
             </p>
 
             {/* Metrics Grid */}
-            <div className="grid grid-cols-3 gap-4 mb-10 border-l-4 border-indigo-500 pl-6">
+            <div className="grid grid-cols-4 gap-4 mb-10 border-l-4 border-indigo-500 pl-6">
               <div>
                 <p className="text-3xl font-bold text-slate-900">10k+</p>
                 <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Downloads</p>
               </div>
               <div>
                 <p className="text-3xl font-bold text-slate-900">4.0</p>
-                <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Play Store Rating</p>
+                <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Play Store</p>
               </div>
               <div>
                 <p className="text-3xl font-bold text-slate-900">99%</p>
-                <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Crash-Free Users</p>
+                <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Crash-Free</p>
+              </div>
+              <div>
+                <p className="text-3xl font-bold text-slate-900">5</p>
+                <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Shipped Apps</p>
               </div>
             </div>
             
@@ -167,7 +179,6 @@ const App = () => {
             </div>
           </motion.div>
 
-          {/* Right: Profile */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -176,13 +187,12 @@ const App = () => {
           >
             <div className="relative w-72 h-72 lg:w-96 lg:h-96">
               <img 
-                src={profileImg} // ИСПОЛЬЗУЕМ ПЕРЕМЕННУЮ
+                src={profileImg}
                 alt="Xenia" 
                 className="relative w-full h-full object-cover rounded-[2rem] shadow-2xl z-10 rotate-3 hover:rotate-0 transition duration-500"
               />
               <div className="absolute inset-0 bg-indigo-600 rounded-[2rem] transform -rotate-6 opacity-20 scale-105 z-0"></div>
 
-              {/* Badges */}
               <motion.div 
                 animate={{ y: [0, -10, 0] }}
                 transition={{ repeat: Infinity, duration: 4 }}
@@ -249,46 +259,82 @@ const App = () => {
                 key={project.id} 
                 className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 lg:gap-20 items-center`}
               >
-                {/* MEDIA CONTAINER */}
                 <a 
                   href={project.link || "#"} 
                   target={project.link ? "_blank" : "_self"} 
                   rel="noreferrer"
                   className={`flex-1 w-full group perspective-1000 block ${!project.link && 'cursor-default'}`}
                 >
-                  <div className={`relative overflow-hidden rounded-2xl shadow-2xl border-4 border-white bg-slate-100 transform ${project.link && 'group-hover:rotate-1 cursor-pointer'} transition duration-500 ${
-                    project.category.includes("Mobile") || project.category.includes("RN") 
-                      ? "aspect-[4/3]" 
-                      : "aspect-video"
-                  }`}>
-                    
-                    <div className={`absolute inset-0 bg-black/0 ${project.link && 'group-hover:bg-black/5'} transition z-10`}></div>
-                    
-                    {isVideo(project.image) ? (
-                      <video 
-                        src={project.image}
-                        autoPlay 
-                        loop 
-                        muted 
-                        playsInline 
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <img 
-                        src={project.image} 
-                        onError={(e) => {e.target.style.display='none'}}
-                        alt={project.title} 
-                        className={`w-full h-full ${
-                           project.category.includes("Mobile") || project.category.includes("RN") 
-                           ? "object-contain p-4 bg-indigo-50" 
-                           : "object-cover object-top"
-                        }`}
-                      />
-                    )}
-                  </div>
+{/* Вычисляем, нужно ли использовать мобильный/вертикальный дизайн */}
+{(() => {
+  const isMobileUI = project.category.includes("Mobile") || project.category.includes("RN") || project.isVertical;
+
+  // === MOBILE / VERTICAL → Phone Mockup ===
+  if (isMobileUI) {
+    return (
+      <div className="flex justify-center items-center py-8">
+        {/* Phone Frame */}
+        <div className="relative w-[280px] sm:w-[300px] group">
+          {/* Notch */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[28px] bg-slate-900 rounded-b-2xl z-20" />
+          
+          {/* Phone Body */}
+          <div className="relative bg-slate-900 rounded-[2.5rem] p-[10px] shadow-2xl 
+                          shadow-slate-400/30 ring-1 ring-slate-700/50
+                          transform group-hover:scale-[1.02] transition duration-500">
+            
+            {/* Screen */}
+            <div className="relative overflow-hidden rounded-[2rem] bg-black aspect-[9/19.5]">
+              {isVideo(project.image) ? (
+                <video 
+                  src={project.image}
+                  autoPlay loop muted playsInline 
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <img 
+                  src={project.image} 
+                  onError={(e) => {e.target.style.display='none'}}
+                  alt={project.title} 
+                  className="w-full h-full object-cover"
+                />
+              )}
+              {/* Subtle screen glare */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none" />
+            </div>
+          </div>
+          
+          {/* Reflection / glow under the phone */}
+          <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[80%] h-8 bg-indigo-500/10 blur-2xl rounded-full" />
+        </div>
+      </div>
+    );
+  }
+
+  // === DESKTOP → как было ===
+  return (
+    <div className={`relative overflow-hidden rounded-2xl shadow-2xl border-4 border-white bg-slate-100 
+                      transform ${project.link && 'group-hover:rotate-1 cursor-pointer'} transition duration-500 aspect-video`}>
+      <div className={`absolute inset-0 bg-black/0 ${project.link && 'group-hover:bg-black/5'} transition z-10`} />
+      {isVideo(project.image) ? (
+        <video 
+          src={project.image}
+          autoPlay loop muted playsInline 
+          className="w-full h-full object-cover"
+        />
+      ) : (
+        <img 
+          src={project.image} 
+          onError={(e) => {e.target.style.display='none'}}
+          alt={project.title} 
+          className="w-full h-full object-cover object-top"
+        />
+      )}
+    </div>
+  );
+})()}
                 </a>
 
-                {/* PROJECT INFO */}
                 <div className="flex-1 space-y-6">
                   <div className="flex items-center gap-3">
                      <span className="px-3 py-1 text-xs font-bold text-indigo-600 bg-indigo-50 rounded-full uppercase tracking-wider">
@@ -307,7 +353,7 @@ const App = () => {
                   </p>
                   
                   <div className="flex flex-wrap gap-2 pt-2">
-                    {project.tech.map(t => (
+                    {project.tech?.map(t => (
                       <span key={t} className="px-3 py-1 bg-white border border-slate-200 text-slate-600 text-sm rounded-md font-medium">
                         {t}
                       </span>
@@ -315,7 +361,6 @@ const App = () => {
                   </div>
 
                   <div className="flex gap-4 pt-6">
-                    {/* КНОПКА LIVE DEMO / GOOGLE PLAY */}
                     {project.link && (
                       <a href={project.link} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-lg font-bold hover:bg-indigo-700 transition shadow-lg shadow-indigo-200">
                         {project.category.includes("Mobile") ? <PlayCircle size={20} /> : <ExternalLink size={20} />} 
@@ -323,7 +368,6 @@ const App = () => {
                       </a>
                     )}
                     
-                    {/* КНОПКА CODE */}
                     {project.github && (
                         <a href={project.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 bg-white text-slate-700 border border-slate-200 rounded-lg font-bold hover:bg-slate-50 transition">
                         <Github size={20} /> Code
@@ -342,7 +386,6 @@ const App = () => {
         <div className="container mx-auto px-6 max-w-4xl">
             <div className="grid md:grid-cols-2 gap-16">
                 
-                {/* Languages */}
                 <div>
                     <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
                         <Globe2 className="text-indigo-600"/> Languages
@@ -356,7 +399,6 @@ const App = () => {
                     </div>
                 </div>
 
-                {/* Certificates */}
                 <div>
                     <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
                         <Award className="text-indigo-600"/> Education
