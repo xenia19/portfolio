@@ -25,7 +25,6 @@ const projects = [
   image: tranquiloVideo,
   tech: ["React", "DeepSeek AI", "PWA", "Gamification"],
     link: "https://tranquilo.quest/",
-    github: "https://github.com/xenia19/tranquilo-quest",
     isVertical: true
   },
   {
