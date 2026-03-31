@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { 
   Github, Linkedin, Mail, ExternalLink, Code2, 
   Smartphone, Globe2, ChevronDown, Award, 
-  Cpu, Layout, Database, PlayCircle, Server 
+  Cpu, Layout, Database, PlayCircle, Server, GraduationCap
 } from 'lucide-react';
 
 // === ИМПОРТЫ ===
@@ -12,28 +12,29 @@ import mobileAppImg from './assets/mobile-app.jpg';
 import passportVideo from './assets/img/passport-demo.mp4';
 import voiceAppImg from './assets/voice-app.jpg';
 import bookingVideo from './assets/img/booking.mp4';
-import tranquiloVideo from './assets/img/Tranquilo.mp4'; // ← ДОБАВЬ ВИДЕО
+import tranquiloVideo from './assets/img/Tranquilo.mp4';
 
+// --- ДАННЫЕ ПРОЕКТОВ ---
 // --- ДАННЫЕ ПРОЕКТОВ ---
 const projects = [
   {
     id: 0,
     title: "Tranquilo.Quest",
-    category: "Gamified Learning Platform (PWA)",
+    category: "AI-Powered Language Survival Simulator",
     badge: "10 Game Engines",
-    description: "AI-powered platform for learning survival Spanish. 10 custom game engines — from roleplay dialogs with DeepSeek AI feedback to audio comprehension and narrative quests with persistent NPCs. Gamified progression with XP, coins, and achievements.",
-  image: tranquiloVideo,
-  tech: ["React", "DeepSeek AI", "PWA", "Gamification"],
+    description: "An immersive Learning Experience platform designed to prepare expats for real-life stress (renting, bureaucracy). Instead of textbook vocabulary, users train via 10 custom game engines — from free-text roleplay dialogs with DeepSeek AI feedback to audio comprehension quests. Features persistent NPCs, gamified progression, and contextual error correction in the user's native language.",
+    image: tranquiloVideo,
+    tech: ["Learning Experience Design", "React", "DeepSeek AI", "Gamification"],
     link: "https://tranquilo.quest/",
     isVertical: true
   },
   {
     id: 1,
     title: "Positive Audio Affirmations",
-    category: "Mobile App (React Native)",
+    category: "Mobile Habit-Building App",
     badge: "10k+ Downloads",
-    description: "A self-hypnosis app aiding 10,000+ users. Features offline-first architecture, AI voice synthesis via ElevenLabs, and monetized via RevenueCat.",
-    tech: ["React Native", "Redux Persist", "Firebase", "RevenueCat", "ElevenLabs API"],
+    description: "A self-improvement mobile app applying psychological principles to aid 10,000+ users. Engineered with offline-first architecture, AI voice synthesis via ElevenLabs, and a fully integrated monetization funnel via RevenueCat.",
+    tech: ["React Native", "User Psychology", "RevenueCat", "ElevenLabs API"],
     image: mobileAppImg,
     link: "https://play.google.com/store/apps/details?id=com.voiceapp.voice", 
     github: null 
@@ -41,10 +42,10 @@ const projects = [
   {
     id: 2,
     title: "The Spanish LXP: Immersion Quest",
-    category: "Gamified Learning Experience Platform (LXP)",
+    category: "Gamified Learning Experience Platform",
     badge: "AI Powered Tutor",
-    description: "An immersive LXP replacing boring lists with a 'Travel Metaphor'. Students earn 'Visas' instead of grades, unlocking a 'Boarding Pass' for missions. Features an AI-Tutor that explains mistakes using natural slang, and a 'Consulado' admin panel for real-time monitoring.",
-    tech: ["React", "DeepSeek AI", "CSS", "Firestore", "Advanced Gamification"],
+    description: "An EdTech platform replacing traditional grading with a 'Travel Metaphor'. Students earn 'Visas' to unlock missions. Engineered an AI-Tutor that explains grammatical mistakes using natural conversational slang, and a 'Consulado' admin panel for real-time student monitoring.",
+    tech: ["EdTech Architecture", "React", "DeepSeek AI", "Firestore"],
     image: passportVideo,
     link: "https://clases-con-xenia.com/app/",
     github: "https://github.com/xenia19/spanish-lxp-immersion"
@@ -52,10 +53,10 @@ const projects = [
   {
     id: 3,
     title: "Tutor Booking SaaS",
-    category: "Full-stack Web App",
+    category: "Full-Stack Learning Management System (LMS)",
     badge: "Live Product",
-    description: "Automated scheduling system. Syncs bookings with Google Calendar API and sends automated email reminders via Node.js scripts & Sendinblue.",
-    tech: ["React", "Firebase Auth", "Google Calendar API", "Sendinblue API", "GitHub Actions"],
+    description: "An automated scheduling and management system built for independent educators. Handles timezone synchronization via Google Calendar API, automated email retention campaigns, and student lesson tracking.",
+    tech: ["Full-Stack", "Firebase Auth", "API Integration", "LMS"],
     image: bookingVideo,
     link: "https://clases-con-xenia.com/",
     github: null
@@ -76,25 +77,20 @@ const projects = [
 // --- НАВЫКИ ---
 const skills = [
   { 
-    icon: <Smartphone size={24} />, 
-    title: "Mobile Development", 
-    desc: "React Native CLI, Redux + Persist, Offline-first architecture, Android Permissions, In-App Purchases." 
+    icon: <GraduationCap size={24} />, 
+    title: "EdTech & Product Design", 
+    desc: "Instructional Design, Gamification, AI Prompt Engineering, User Psychology, Curriculum Architecture." 
   },
   { 
     icon: <Layout size={24} />, 
-    title: "Frontend Core", 
-    desc: "React 19, JavaScript (ES6+), HTML/CSS, UX/UI Psychology." 
+    title: "Frontend & Mobile", 
+    desc: "React, React Native, JavaScript (ES6+), Offline-first architecture, UX/UI." 
   },
   { 
     icon: <Server size={24} />, 
-    title: "Backend & Automation", 
-    desc: "Python (Flask), Node.js scripting, GitHub Actions (CI/CD), REST API design, File handling." 
-  },
-  { 
-    icon: <Database size={24} />, 
-    title: "Cloud & Services", 
-    desc: "Firebase (Auth, Firestore), DeepSeek AI, ElevenLabs, Google Calendar API, RevenueCat, Render." 
-  },
+    title: "Backend, AI & Automation", 
+    desc: "DeepSeek AI, ElevenLabs, Firebase (Auth, Firestore), Python, REST API design." 
+  }
 ];
 
 const certificates = [
@@ -134,37 +130,37 @@ const App = () => {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 text-sm font-bold tracking-widest text-indigo-700 uppercase bg-indigo-50 border border-indigo-100 rounded-full">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-              React & React Native Developer
+              EdTech Product Creator & LXD
             </div>
             
             <h1 className="text-5xl lg:text-7xl font-extrabold text-slate-900 mb-6 leading-[1.1]">
-              I build apps that <br/>
+              I build educational products that <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">people actually use.</span>
             </h1>
             
             <p className="text-xl text-slate-600 mb-8 leading-relaxed max-w-lg">
-              Hi, I'm <b>Xenia</b>. A React & Mobile Developer. 
-              I created a mobile app with <b className="text-slate-900">10k+ downloads</b> and 
-              an AI-powered learning platform with <b className="text-slate-900">10 game engines</b>.
+              Hi, I'm <b>Xenia</b>. An EdTech Product Creator & Learning Experience Designer (LXD). 
+              I bridge the gap between language pedagogy, AI, and code to build interactive platforms 
+              and mobile apps with <b className="text-slate-900">10,000+ active users</b>.
             </p>
 
             {/* Metrics Grid */}
-            <div className="grid grid-cols-4 gap-4 mb-10 border-l-4 border-indigo-500 pl-6">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10 border-l-4 border-indigo-500 pl-6">
+              <div>
+                <p className="text-3xl font-bold text-slate-900">14+</p>
+                <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Years in Education</p>
+              </div>
               <div>
                 <p className="text-3xl font-bold text-slate-900">10k+</p>
-                <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Downloads</p>
+                <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">App Downloads</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-slate-900">4.0</p>
-                <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Play Store</p>
-              </div>
-              <div>
-                <p className="text-3xl font-bold text-slate-900">99%</p>
-                <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Crash-Free</p>
+                <p className="text-3xl font-bold text-slate-900">10</p>
+                <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">EdTech Engines</p>
               </div>
               <div>
                 <p className="text-3xl font-bold text-slate-900">5</p>
-                <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Shipped Apps</p>
+                <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Shipped Products</p>
               </div>
             </div>
             
@@ -224,7 +220,7 @@ const App = () => {
       <section className="py-20 bg-white border-y border-slate-100">
          <div className="container mx-auto px-6 max-w-6xl">
             <h3 className="text-center text-slate-500 font-bold uppercase tracking-widest mb-12">Tech Stack & Tools</h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                {skills.map((skill, i) => (
                  <div key={i} className="p-6 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-xl transition duration-300 border border-transparent hover:border-indigo-100">
                     <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-indigo-600 mb-4">
