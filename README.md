@@ -1,6 +1,4 @@
 🧠 Ksenia Galaktionova | AI Learning Experience Designer & EdTech Builder
-!(https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-!(https://img.shields.io/badge/Learning_Science-TBLT_%7C_Cognitive_Psychology-D97706?style=for-the-badge)
 
 Architecting AI-driven learning environments by bridging 14 years of cognitive psychology and pedagogy with modern product development.
 
