@@ -15,37 +15,37 @@ import bookingVideo from './assets/img/booking.mp4';
 import tranquiloVideo from './assets/img/Tranquilo.mp4';
 
 // --- ДАННЫЕ ПРОЕКТОВ ---
-// --- ДАННЫЕ ПРОЕКТОВ ---
 const projects = [
   {
     id: 0,
     title: "Tranquilo.Quest",
-    category: "AI-Powered Language Survival Simulator",
-    badge: "10 Game Engines",
-    description: "An immersive Learning Experience platform designed to prepare expats for real-life stress (renting, bureaucracy). Instead of textbook vocabulary, users train via 10 custom game engines — from free-text roleplay dialogs with DeepSeek AI feedback to audio comprehension quests. Features persistent NPCs, gamified progression, and contextual error correction in the user's native language.",
+    category: "AI Learning Experience Design",
+    badge: "TBLT + LLM",
+    description: "A scenario-based Spanish learning app for adult A1–A2 learners who freeze when it's time to speak. Applied Task-Based Language Teaching (TBLT) methodology: learners practice real-life situations (rental disputes, medical emergencies, bureaucracy) with a DeepSeek LLM tutor giving contextual feedback in their native language. Designed 10 interactive mechanics and the prompt architecture from scratch.",
     image: tranquiloVideo,
-    tech: ["Learning Experience Design", "React", "DeepSeek AI", "Gamification"],
+    tech: ["TBLT", "DeepSeek LLM", "ElevenLabs", "Prompt Design"],
     link: "https://tranquilo.quest/",
+     caseStudy: "/portfolio/case-studies/tranquilo.html",
     isVertical: true
   },
   {
     id: 1,
     title: "Positive Audio Affirmations",
-    category: "Mobile Habit-Building App",
-    badge: "10k+ Downloads",
-    description: "A self-improvement mobile app applying psychological principles to aid 10,000+ users. Engineered with offline-first architecture, AI voice synthesis via ElevenLabs, and a fully integrated monetization funnel via RevenueCat.",
-    tech: ["React Native", "User Psychology", "RevenueCat", "ElevenLabs API"],
+    category: "B2C Product & Behavioral Design",
+    badge: "10k+ Downloads · 4.0★ (97 reviews)",
+    description: "A habit-building mobile app applying behavioral psychology (spaced repetition, streaks, audio-first UX). Led the full product lifecycle solo: behavioral design, technical architecture, App Store launch, subscription funnel (RevenueCat), retention iteration based on user feedback and drop-off patterns. Paying subscribers generating monthly recurring revenue.",
+    tech: ["Behavioral Psychology", "Retention Design", "RevenueCat", "React Native"],
     image: mobileAppImg,
     link: "https://play.google.com/store/apps/details?id=com.voiceapp.voice", 
     github: null 
   },
   {
     id: 2,
-    title: "The Spanish LXP: Immersion Quest",
-    category: "Gamified Learning Experience Platform",
-    badge: "AI Powered Tutor",
-    description: "An EdTech platform replacing traditional grading with a 'Travel Metaphor'. Students earn 'Visas' to unlock missions. Engineered an AI-Tutor that explains grammatical mistakes using natural conversational slang, and a 'Consulado' admin panel for real-time student monitoring.",
-    tech: ["EdTech Architecture", "React", "DeepSeek AI", "Firestore"],
+    title: "The Spanish LXP — Immersion Quest",
+    category: "Instructional Design & Architecture",
+    badge: "CEFR-Aligned LXP",
+    description: "A gamified Learning Experience Platform for adult Spanish learners. Designed CEFR-aligned learning paths (A1–B1), progressive missions instead of grades, and an AI tutor that explains grammatical mistakes in conversational language. Currently exploring xAPI integration for enterprise compliance as a learning goal.",
+    tech: ["CEFR Curriculum", "Gamification", "DeepSeek LLM", "System Design"],
     image: passportVideo,
     link: "https://clases-con-xenia.com/app/",
     github: "https://github.com/xenia19/spanish-lxp-immersion"
@@ -53,10 +53,10 @@ const projects = [
   {
     id: 3,
     title: "Tutor Booking SaaS",
-    category: "Full-Stack Learning Management System (LMS)",
+    category: "Full-Stack EdTech Tool",
     badge: "Live Product",
-    description: "An automated scheduling and management system built for independent educators. Handles timezone synchronization via Google Calendar API, automated email retention campaigns, and student lesson tracking.",
-    tech: ["Full-Stack", "Firebase Auth", "API Integration", "LMS"],
+    description: "A scheduling and LMS platform built for independent educators. Handles timezone synchronization via Google Calendar API, automated email reminders, and student lesson tracking. Running in production for my own teaching practice.",
+    tech: ["Full-Stack", "Firebase Auth", "Google Calendar API", "Node.js"],
     image: bookingVideo,
     link: "https://clases-con-xenia.com/",
     github: null
@@ -64,44 +64,49 @@ const projects = [
   {
     id: 4,
     title: "Voice Journal & Transcriber",
-    category: "Full-Stack (RN + Python)",
+    category: "Mobile + Backend",
     badge: "Engineering Demo",
-    description: "Voice journaling app with a custom Python backend for speech-to-text. Solved Android 13+ permission issues and implemented reliable file uploads.",
-    tech: ["React Native", "Python (Flask)", "Vosk API", "File System", "Render"],
+    description: "Voice journaling app with a custom Python backend for speech-to-text. Solved Android 13+ permission issues and implemented reliable file uploads. 1,000+ downloads on Google Play.",
+    tech: ["React Native", "Python/Flask", "Vosk API", "Render"],
     image: voiceAppImg,
     link: "https://play.google.com/store/apps/details?id=com.voicejournal",
-    github: "https://github.com/xenia19/voice-journal"
-  },
+    github: "https://github.com/xenia19/voice-journal",
+    isVertical: true
+  }
 ];
 
 // --- НАВЫКИ ---
 const skills = [
   { 
     icon: <GraduationCap size={24} />, 
-    title: "EdTech & Product Design", 
-    desc: "Instructional Design, Gamification, AI Prompt Engineering, User Psychology, Curriculum Architecture." 
-  },
-  { 
-    icon: <Layout size={24} />, 
-    title: "Frontend & Mobile", 
-    desc: "React, React Native, JavaScript (ES6+), Offline-first architecture, UX/UI." 
+    title: "Learning Design & Pedagogy", 
+    desc: "Task-Based Language Teaching (TBLT), CLT, CEFR-aligned curriculum design, cognitive load management, gamification, assessment design." 
   },
   { 
     icon: <Server size={24} />, 
-    title: "Backend, AI & Automation", 
-    desc: "DeepSeek AI, ElevenLabs, Firebase (Auth, Firestore), Python, REST API design." 
+    title: "AI for Learning", 
+    desc: "LLM integration (DeepSeek, OpenAI), prompt design for educational feedback, conversational learning flows, AI voice synthesis (ElevenLabs)." 
+  },
+  { 
+    icon: <Layout size={24} />, 
+    title: "Product & Delivery", 
+    desc: "End-to-end product lifecycle, retention design, subscription monetization (RevenueCat), App Store publishing, user research." 
   }
 ];
 
 const certificates = [
   { 
+    name: "Generative AI for Learning and Development", 
+    issuer: "LinkedIn Learning · 2026", 
+  },
+  { 
     name: "IBM Full Stack Software Developer", 
-    issuer: "Coursera / IBM", 
+    issuer: "Coursera / IBM · 2024", 
     link: "https://www.coursera.org/account/accomplishments/professional-cert/YQ4OOH6U3R3A", 
   },
   { 
     name: "Bachelor in Psychology", 
-    issuer: "University Degree", 
+    issuer: "Tyumen State University", 
   }
 ];
 
@@ -130,33 +135,31 @@ const App = () => {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 text-sm font-bold tracking-widest text-indigo-700 uppercase bg-indigo-50 border border-indigo-100 rounded-full">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-              EdTech Product Creator & LXD
+              AI Learning Experience Designer
             </div>
             
             <h1 className="text-5xl lg:text-7xl font-extrabold text-slate-900 mb-6 leading-[1.1]">
-              I build educational products that <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">people actually use.</span>
+              Where language pedagogy <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">meets LLM architecture.</span>
             </h1>
             
             <p className="text-xl text-slate-600 mb-8 leading-relaxed max-w-lg">
-              Hi, I'm <b>Xenia</b>. An EdTech Product Creator & Learning Experience Designer (LXD). 
-              I bridge the gap between language pedagogy, AI, and code to build interactive platforms 
-              and mobile apps with <b className="text-slate-900">10,000+ active users</b>.
+             Hi, I'm Ksenia. Learning Experience Designer and EdTech founder. 14 years of language teaching combined with hands-on product building — I design the pedagogy, prototype the AI, and ship the apps. Currently focused on conversational language learning at the intersection of TBLT and LLMs.
             </p>
 
             {/* Metrics Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10 border-l-4 border-indigo-500 pl-6">
               <div>
                 <p className="text-3xl font-bold text-slate-900">14+</p>
-                <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Years in Education</p>
+                <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Years Teaching</p>
               </div>
               <div>
                 <p className="text-3xl font-bold text-slate-900">10k+</p>
                 <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">App Downloads</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-slate-900">10</p>
-                <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">EdTech Engines</p>
+                <p className="text-3xl font-bold text-slate-900">77K</p>
+                <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">YouTube Subscribers</p>
               </div>
               <div>
                 <p className="text-3xl font-bold text-slate-900">5</p>
@@ -194,11 +197,11 @@ const App = () => {
                 className="absolute -top-6 -left-6 z-20 bg-white p-4 rounded-xl shadow-xl border border-slate-100 flex items-center gap-3"
               >
                 <div className="p-3 bg-blue-100 text-blue-600 rounded-full">
-                  <Smartphone size={24} />
+                  <Cpu size={24} />
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 font-bold uppercase">Mobile</p>
-                  <p className="text-sm font-bold text-slate-900">React Native</p>
+                  <p className="text-xs text-slate-500 font-bold uppercase">Pedagogy</p>
+                  <p className="text-sm font-bold text-slate-900">+ AI + Code</p>
                 </div>
               </motion.div>
             </div>
@@ -219,7 +222,7 @@ const App = () => {
       {/* --- SKILLS GRID --- */}
       <section className="py-20 bg-white border-y border-slate-100">
          <div className="container mx-auto px-6 max-w-6xl">
-            <h3 className="text-center text-slate-500 font-bold uppercase tracking-widest mb-12">Tech Stack & Tools</h3>
+            <h3 className="text-center text-slate-500 font-bold uppercase tracking-widest mb-12">Core Competencies</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                {skills.map((skill, i) => (
                  <div key={i} className="p-6 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-xl transition duration-300 border border-transparent hover:border-indigo-100">
@@ -240,7 +243,7 @@ const App = () => {
           <div className="text-center mb-20">
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Selected Work</h2>
             <p className="text-slate-500 max-w-2xl mx-auto text-lg">
-              Commercial projects and complex platforms built from scratch.
+              Learning products built end-to-end: pedagogy, AI integration, code, and user research.
             </p>
           </div>
 
@@ -262,7 +265,7 @@ const App = () => {
                 >
 {/* Вычисляем, нужно ли использовать мобильный/вертикальный дизайн */}
 {(() => {
-  const isMobileUI = project.category.includes("Mobile") || project.category.includes("RN") || project.isVertical;
+  const isMobileUI = project.category.includes("Mobile") || project.category.includes("RN") || project.category.includes("B2C") || project.isVertical;
 
   // === MOBILE / VERTICAL → Phone Mockup ===
   if (isMobileUI) {
@@ -358,10 +361,18 @@ const App = () => {
                   <div className="flex gap-4 pt-6">
                     {project.link && (
                       <a href={project.link} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-lg font-bold hover:bg-indigo-700 transition shadow-lg shadow-indigo-200">
-                        {project.category.includes("Mobile") ? <PlayCircle size={20} /> : <ExternalLink size={20} />} 
-                        {project.category.includes("Mobile") ? "Google Play" : "Live Demo"}
+                        {project.category.includes("B2C") ? <PlayCircle size={20} /> : <ExternalLink size={20} />} 
+                        {project.category.includes("B2C") ? "Google Play" : "Live Demo"}
+                        
                       </a>
                     )}
+
+                       {/* ← ВСТАВЬ СЮДА */}
+    {project.caseStudy && (
+      <a href={project.caseStudy} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 bg-amber-500 text-white rounded-lg font-bold hover:bg-amber-600 transition shadow-lg shadow-amber-200">
+        📖 Read Case Study
+      </a>
+    )}
                     
                     {project.github && (
                         <a href={project.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 bg-white text-slate-700 border border-slate-200 rounded-lg font-bold hover:bg-slate-50 transition">
@@ -386,7 +397,7 @@ const App = () => {
                         <Globe2 className="text-indigo-600"/> Languages
                     </h2>
                     <div className="grid grid-cols-2 gap-4">
-                        {['English', 'Spanish', 'Italian', 'Russian'].map(lang => (
+                        {['English (C1)', 'Spanish (C1)', 'Italian (B2)', 'Russian (Native)'].map(lang => (
                             <div key={lang} className="flex items-center gap-2 text-slate-700 font-medium p-3 bg-slate-50 rounded-lg">
                                 <span className="w-2 h-2 bg-green-500 rounded-full"></span> {lang}
                             </div>
@@ -429,13 +440,16 @@ const App = () => {
       {/* --- FOOTER --- */}
       <footer className="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-2xl font-bold text-white mb-8">Let's work together.</h2>
+          <h2 className="text-2xl font-bold text-white mb-4">Let's work together.</h2>
+          <p className="text-slate-400 mb-8 max-w-xl mx-auto">
+            Open to Learning Designer and EdTech Product roles. EU-based (Italy), available for remote work across Europe.
+          </p>
           <div className="flex justify-center gap-8 mb-8">
             <a href="https://linkedin.com/in/ksenia-galaktionova-a60b30b0/" className="hover:text-white hover:scale-110 transition"><Linkedin size={28} /></a>
             <a href="https://github.com/xenia19" className="hover:text-white hover:scale-110 transition"><Github size={28} /></a>
             <a href="mailto:xenia13@protonmail.com" className="hover:text-white hover:scale-110 transition"><Mail size={28} /></a>
           </div>
-          <p className="text-slate-500 text-sm">© {new Date().getFullYear()} Xenia Galaktionova</p>
+          <p className="text-slate-500 text-sm">© {new Date().getFullYear()} Ksenia Galaktionova</p>
         </div>
       </footer>
     </div>
