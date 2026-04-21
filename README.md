@@ -1,23 +1,29 @@
-# 👩‍💻 Frontend Developer Portfolio
+🧠 Ksenia Galaktionova | AI Learning Experience Designer & EdTech Builder
+!(https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+!(https://img.shields.io/badge/Learning_Science-TBLT_%7C_Cognitive_Psychology-D97706?style=for-the-badge)
 
-![React](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-Fast_Build-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+Architecting AI-driven learning environments by bridging 14 years of cognitive psychology and pedagogy with modern product development.
 
-> A modern, responsive personal portfolio website designed to showcase my engineering projects, skills, and background in psychology.
+🌐 Live Portfolio & Case Studies
+xenia19.github.io/portfolio
 
-### 🌐 Live Demo
-**[xenia19.github.io/portfolio](https://xenia19.github.io/portfolio/)**
+🚀 About Me: From Psychology to AI-Native Products
+I don't just write code; I design systems that change human behavior. After 14+ years of applying Task-Based Language Teaching (TBLT) and cognitive psychology to adult education, I transitioned into software development to build the learning tools I wished I had.
 
----
+My work focuses on solving the hardest problems in EdTech — output anxiety, drill fatigue, and knowledge transfer — by combining instructional design with Conversational AI and frontend architecture.
 
-## 🚀 About the Project
-This project serves as my digital resume and project showcase. I built it from scratch focusing on clean UI, smooth animations, and responsive design across all devices. 
+🛠️ Core Competencies
+AI & Product Architecture: Prompt Engineering, Context Window Management, Conversational AI flows, Intent-based systems (DeepSeek, ElevenLabs).
 
-It highlights my transition from a Psychology background to Full-stack & Mobile Development, featuring commercial apps, SaaS products, and AI integrations.
+Learning Science: Cognitive Load Management, TBLT, Spaced Repetition, Behavioral Activation.
 
-## 🛠️ Tech Stack
-* **Framework:** React (Vite)
-* **Styling:** Tailwind CSS
-* **Icons:** Lucide React
-* **Deployment:** GitHub Pages (Automated via `gh-pages`)
+Engineering & Delivery: React, React Native, JavaScript, Firebase, Tailwind CSS, Vite.
+
+Product Management: End-to-end lifecycle, mobile monetization (RevenueCat), habit-building retention loops.
+
+📂 Featured Systems
+Tranquilo.Quest — An AI-native survival simulator for expats. Engineered graduated output pressure and intent-based AI evaluation to cure language anxiety.
+
+Positive Audio Affirmations (10k+ Downloads) — Mobile habit-building app. Designed retention loops grounded in behavioral psychology to drive Monthly Recurring Revenue.
+
+The Spanish LXP — Gamified immersion platform. Architected continuous narrative progression and natural error correction using LLMs.
