@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spanish Learning Platform — Voice Tutor Design Notes | Ksenia Galaktionova</title>
+<meta name="description" content="Voice practice design in the Spanish Learning Platform: communication repair, conversational AI, graduated hints, response constraints, and evaluation priorities.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:          #FFFFFF;
+  --bg-soft:     #F7F7F5;
+  --ink:         #1A1A1A;
+  --ink-soft:    #4A4A4A;
+  --ink-fade:    #767676;
+  --rule:        #E5E5E2;
+  --rule-strong: #1A1A1A;
+  --accent:      #2A5A8A;   /* calm blue, not signal-red */
+
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+
+  --col: 42rem;
+  --col-wide: 60rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  font-feature-settings: "kern", "liga";
+}
+
+a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--bg-soft);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  color: var(--ink);
+}
+
+em { font-style: italic; }
+strong { font-weight: 600; }
+
+/* ==========  TOP NAV  ========== */
+.topnav {
+  max-width: var(--col-wide);
+  margin: 0 auto;
+  padding: 1.5rem 2rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--ink-fade);
+}
+.topnav a { color: var(--ink-soft); text-decoration: none; font-weight: 500; }
+.topnav a:hover { color: var(--accent); }
+.topnav .series { letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; font-size: 0.7rem; }
+
+/* ==========  HEADER  ========== */
+header {
+  max-width: var(--col-wide);
+  margin: 0 auto;
+  padding: 3.5rem 2rem 3rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.label {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-fade);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 2.1rem;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.2rem;
+  max-width: 36rem;
+}
+
+.subhead {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 42rem;
+}
+
+/* product / audience line */
+.context {
+  margin-top: 1.5rem;
+  padding: 1rem 1.2rem;
+  background: var(--bg-soft);
+  border-left: 3px solid var(--accent);
+  max-width: var(--col);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.context strong { color: var(--ink); }
+.context .row { display: block; }
+.context .row + .row { margin-top: 0.3rem; }
+.context .k {
+  display: inline-block;
+  min-width: 5.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2.5rem;
+  font-size: 0.85rem;
+  color: var(--ink-fade);
+}
+.meta span strong { color: var(--ink); font-weight: 500; margin-right: 0.5rem; }
+
+/* ==========  SECTIONS  ========== */
+section {
+  max-width: var(--col-wide);
+  margin: 0 auto;
+  padding: 4rem 2rem 2rem;
+}
+
+.section-tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+h2 {
+  font-size: 1.55rem;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.5rem;
+  max-width: 36rem;
+}
+
+h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-top: 2.5rem;
+  margin-bottom: 0.8rem;
+  color: var(--ink);
+}
+
+p {
+  margin-bottom: 1rem;
+  max-width: var(--col);
+  color: var(--ink-soft);
+}
+p strong { color: var(--ink); }
+
+/* ==========  AI / DETERMINISTIC TABLE  ========== */
+.table {
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.t-head, .t-row {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 3.5fr;
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.t-head {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-fade);
+  font-weight: 600;
+  border-bottom: 1px solid var(--rule);
+}
+
+.t-row {
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.t-row:last-child { border-bottom: none; }
+
+.t-row .job {
+  color: var(--ink);
+  font-weight: 500;
+}
+.t-row .why {
+  color: var(--ink-soft);
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+.badge.llm { background: var(--accent); color: white; }
+.badge.det { background: var(--ink); color: white; }
+.badge.hard { background: var(--ink); color: white; }
+.badge.soft { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+
+.principle {
+  margin-top: 2rem;
+  padding: 1.2rem 1.4rem;
+  background: var(--bg-soft);
+  border-left: 3px solid var(--accent);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ink);
+  max-width: var(--col);
+}
+
+/* ==========  PEDAGOGICAL SAFETY  ========== */
+.def {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  background: var(--bg-soft);
+  border-radius: 4px;
+  max-width: var(--col);
+}
+.def p { margin-bottom: 0.8rem; color: var(--ink); }
+.def ol { list-style: none; padding: 0; }
+.def ol li {
+  position: relative;
+  padding-left: 1.8rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  counter-increment: defcount;
+}
+.def ol { counter-reset: defcount; }
+.def ol li::before {
+  content: "(" counter(defcount, lower-alpha) ")";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* Constraint table */
+.constraint-table {
+  margin-top: 1rem;
+  border-top: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.c-head, .c-row {
+  display: grid;
+  grid-template-columns: 3fr 0.8fr 1.8fr;
+  gap: 1.5rem;
+  padding: 0.9rem 0;
+}
+.c-head {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-fade);
+  font-weight: 600;
+  border-bottom: 1px solid var(--rule);
+}
+.c-row {
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.c-row:last-child { border-bottom: none; }
+.c-row .check { color: var(--ink); }
+.c-row .method { color: var(--ink-soft); font-family: var(--mono); font-size: 0.78rem; }
+
+/* Tier list */
+.tier {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  gap: 1.5rem;
+  padding: 1.3rem 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+.tier:last-child { border-bottom: 1px solid var(--rule); }
+.tier .t-num {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+.tier .t-body h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.tier .t-body p {
+  font-size: 0.92rem;
+  margin-bottom: 0;
+  color: var(--ink-soft);
+  max-width: 36rem;
+}
+
+/* ==========  NoM  ========== */
+.nom {
+  margin-top: 1.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.nom-row {
+  display: grid;
+  grid-template-columns: 3rem 1fr 1.5fr;
+  gap: 1.5rem;
+  padding: 0.95rem 1.2rem;
+  border-bottom: 1px solid var(--rule);
+  align-items: center;
+  font-size: 0.9rem;
+}
+.nom-row:last-child { border-bottom: none; }
+.nom-row .id {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+.nom-row .name {
+  color: var(--ink);
+  font-weight: 500;
+}
+.nom-row .example {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.nom-row .example .arrow {
+  color: var(--accent);
+  margin: 0 0.4rem;
+}
+
+.escalation {
+  margin-top: 1.2rem;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  max-width: var(--col);
+}
+
+/* ==========  FOOTER  ========== */
+footer {
+  max-width: var(--col-wide);
+  margin: 4rem auto 0;
+  padding: 2rem 2rem 5rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.9rem;
+  color: var(--ink-fade);
+  line-height: 1.6;
+}
+.next-part {
+  display: block;
+  padding: 1.4rem 1.6rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  max-width: var(--col);
+}
+.next-part .kicker {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+.next-part .title { color: var(--ink); font-weight: 600; font-size: 1.05rem; margin-top: 0.3rem; }
+.footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+footer p { color: var(--ink-fade); max-width: var(--col); margin-bottom: 0.6rem; }
+
+/* ==========  MOBILE  ========== */
+@media (max-width: 720px) {
+  .topnav { padding: 1.2rem 1.5rem 0; }
+  header { padding: 2.5rem 1.5rem 2rem; }
+  section { padding: 3rem 1.5rem 1.5rem; }
+  footer { padding: 2rem 1.5rem 3rem; }
+  h1 { font-size: 1.7rem; }
+  h2 { font-size: 1.35rem; }
+
+  .t-head, .t-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .t-head { display: none; }
+  .t-row { padding: 1.2rem 0; }
+  .t-row .why { font-size: 0.88rem; }
+
+  .c-head, .c-row {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+  .c-head { display: none; }
+  .c-row { padding: 1rem 0; }
+
+  .nom-row {
+    grid-template-columns: 2rem 1fr;
+    gap: 1rem;
+  }
+  .nom-row .example { grid-column: 1 / -1; padding-left: 3rem; }
+
+  .tier { grid-template-columns: 1fr; gap: 0.5rem; }
+}
+</style>
+<link rel="canonical" href="https://xenia19.github.io/portfolio/case-studies/voice-architecture.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spanish Learning Platform — Voice Tutor Design Notes">
+<meta property="og:description" content="Voice practice design in the Spanish Learning Platform: communication repair, conversational AI, graduated hints, response constraints, and evaluation priorities.">
+<meta property="og:url" content="https://xenia19.github.io/portfolio/case-studies/voice-architecture.html">
+<meta name="twitter:card" content="summary">
+<style>
+/* Shared accessibility and evidence context for retained architecture notes. */
+:root { --ink-fade: #595959; }
+html { scroll-padding-top: 2rem; }
+a:focus-visible { outline: 3px solid #b45309; outline-offset: 5px; }
+.skip-link { position: fixed; top: -100px; left: 16px; background: white; padding: 12px 20px; z-index: 100; }
+.skip-link:focus { top: 12px; }
+.evidence-note { border-left: 3px solid #4338ca; background: #eef2ff; padding: 18px 22px; margin-top: 24px; max-width: 44rem; font-size: .88rem; color: #334155; }
+.evidence-note p { font-size: inherit; margin: 0 0 10px; }
+.evidence-note p:last-child { margin: 0; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to design notes</a>
+
+<!-- ==========  TOP NAV  ========== -->
+<nav class="topnav">
+  <a href="../#projects">&larr; Back to portfolio</a>
+  <span class="series">Spanish Learning Platform &middot; Notes 2 of 2</span>
+</nav>
+
+<!-- ==========  HEADER  ========== -->
+<main id="main" tabindex="-1">
+<header>
+  <div class="label">Architecture notes</div>
+  <h1>Voice Call Tutor — where AI helps, and where it must not</h1>
+  <p class="subhead">
+    Design notes on an experimental voice exercise: conversational practice, support when a
+    learner gets stuck, and intended response constraints. The companion to
+    <a href="pedagogy-architecture.html">Part&nbsp;1</a>, which covers lesson delivery,
+    independent practice, and teacher workflows.
+  </p>
+
+  <div class="context">
+    <span class="row"><span class="k">Product</span> <strong>Spanish Learning Platform / Clases con Xenia</strong> — used in individual Spanish lessons and independent practice.</span>
+    <span class="row"><span class="k">For</span> a single teacher and her Russian-speaking expat students in Spain.</span>
+  </div>
+
+  <div class="meta">
+    <span><strong>Domain</strong>Second Language Acquisition</span>
+    <span><strong>Stack</strong>DeepSeek &middot; ElevenLabs &middot; React</span>
+    <span><strong>Reading time</strong>~5 minutes</span>
+  </div>
+<div class="evidence-note"><p><strong>Design notes · Spanish Learning Platform.</strong> A closer look at conversational practice and the trade-offs of AI-supported feedback. The validation checklist below is a proposed improvement.</p><p>The <a href="spanish-platform.html">platform case study</a> describes the wider teaching context and priorities for evaluation.</p></div>
+</header>
+
+<!-- ==========  01 — THE PROBLEM  ========== -->
+<section>
+  <div class="section-tag">01 — The problem</div>
+  <h2>The learner needs to practise repair, not perfection</h2>
+
+  <p>
+    A Russian-speaking expat in Spain has to book a doctor, decline a contract, explain a leak to the neighbour.
+    She opens the app, the phone rings, and she has to produce spoken Spanish — fast, without a metalanguage safety net.
+  </p>
+
+  <p>
+    The exercise is intended to practise <strong>communication repair</strong>. The goal is not a grammatically pristine sentence;
+    the goal is the next move after the first one collapses.
+  </p>
+
+  <p>
+    The design treats the model as an in-character conversation partner. It aims to make clarification and reformulation part of the situation, with support when the learner stalls.
+  </p>
+</section>
+
+<!-- ==========  02 — AI vs DETERMINISTIC  ========== -->
+<section>
+  <div class="section-tag">02 — Where AI helps, where it doesn't</div>
+  <h2>Splitting the work between the LLM and plain code</h2>
+
+  <p>
+    The design combines flexible model responses with local rules for predictable tasks.
+    The table below describes that division of work, including a proposed validation step.
+  </p>
+
+  <div class="table">
+    <div class="t-head">
+      <div>The job</div>
+      <div>Done by</div>
+      <div>Why</div>
+    </div>
+
+    <div class="t-row">
+      <div class="job">Judging whether the answer completed the task</div>
+      <div><span class="badge llm">LLM</span></div>
+      <div class="why">Needs semantic flexibility. Rigid matching kills paraphrase, and paraphrase is the point.</div>
+    </div>
+
+    <div class="t-row">
+      <div class="job">Generating the in-character reformulation</div>
+      <div><span class="badge llm">LLM</span></div>
+      <div class="why">Open-ended creative speech, constrained by persona and the last turn. No template covers it.</div>
+    </div>
+
+    <div class="t-row">
+      <div class="job">Matching common acceptable answers as a pre-pass</div>
+      <div><span class="badge det">Code</span></div>
+      <div class="why">Local matching can handle recognized answers before requesting a model response; unfamiliar phrasing still needs interpretation.</div>
+    </div>
+
+    <div class="t-row">
+      <div class="job">Extracting <code>name</code> / <code>time</code> / <code>symptom</code> from speech</div>
+      <div><span class="badge det">Code</span></div>
+      <div class="why">A regex grabs these facts instantly. A second LLM call per turn is wasted latency.</div>
+    </div>
+
+    <div class="t-row">
+      <div class="job">Rejecting <em>hola</em> alone as an answer to a compound task</div>
+      <div><span class="badge det">Code</span></div>
+      <div class="why">AI judges are too forgiving on pragmatic appropriateness. They accept friendly fragments. Code is the floor.</div>
+    </div>
+
+    <div class="t-row">
+      <div class="job">Proposed: validating LLM output against pedagogical constraints</div>
+      <div><span class="badge det">Code</span></div>
+      <div class="why">A separate validation layer would check response structure and selected constraints before playback. See section 03.</div>
+    </div>
+  </div>
+
+  <div class="principle">
+    Let the LLM do what only an LLM can do. Use plain code for everything else.
+  </div>
+</section>
+
+<!-- ==========  03 — PEDAGOGICAL SAFETY  ========== -->
+<section>
+  <div class="section-tag">03 — Intended response constraints</div>
+  <h2>Keep responses focused on the learner’s task</h2>
+
+  <h3>A working definition</h3>
+  <div class="def">
+    <p>A pedagogically sound AI response is one that simultaneously&nbsp;—</p>
+    <ol>
+      <li>respects the learner's L2 production zone: no metalanguage, no L1 leak into target-language turns;</li>
+      <li>stays within the persona's communicative range — a line a real Spaniard might actually say;</li>
+      <li>advances the task or scaffolds it through a defined repair move;</li>
+      <li>is verifiable against a finite list of constraints, not <em>“feels right”</em>.</li>
+    </ol>
+  </div>
+
+  <h3>Proposed validation checklist</h3>
+  <p>
+    I would add these checks to a response-validation layer. Hard checks would block unsuitable output; soft checks would flag it for revision or review. Prompt instructions alone cannot ensure that a response meets these requirements.
+  </p>
+
+  <div class="constraint-table">
+    <div class="c-head">
+      <div>The check</div>
+      <div>Type</div>
+      <div>Method</div>
+    </div>
+
+    <div class="c-row">
+      <div class="check">No metalanguage tokens (<code>diga</code>, <code>repita</code>, <code>por ejemplo</code>, <code>tienes que</code>)</div>
+      <div><span class="badge hard">Hard</span></div>
+      <div class="method">regex pre-flight</div>
+    </div>
+
+    <div class="c-row">
+      <div class="check">Reformulation ≤ 14 words, single sentence</div>
+      <div><span class="badge hard">Hard</span></div>
+      <div class="method">word count + sentence split</div>
+    </div>
+
+    <div class="c-row">
+      <div class="check">Russian subtitle is a hint, not a translation of the answer</div>
+      <div><span class="badge hard">Hard</span></div>
+      <div class="method">cross-language token overlap</div>
+    </div>
+
+    <div class="c-row">
+      <div class="check">Output is valid JSON matching the schema</div>
+      <div><span class="badge hard">Hard</span></div>
+      <div class="method">Proposed JSON parsing + schema validation</div>
+    </div>
+
+    <div class="c-row">
+      <div class="check">NoM technique differs from the technique on the previous rung</div>
+      <div><span class="badge soft">Soft</span></div>
+      <div class="method">tracked in state</div>
+    </div>
+
+    <div class="c-row">
+      <div class="check">NPC does not repeat the word the learner just failed to understand</div>
+      <div><span class="badge soft">Soft</span></div>
+      <div class="method">token overlap vs last turn</div>
+    </div>
+  </div>
+
+  <h3>Three tiers of evidence</h3>
+  <p>
+    I would evaluate the exercise at three levels, using activity data alongside teacher review
+    and new communicative tasks.
+  </p>
+
+  <div class="tier">
+    <div class="t-num">01 — Engagement</div>
+    <div class="t-body">
+      <h4>Did the learner stay in the call?</h4>
+      <p>Time-on-task, completion rate, voluntary repeat. Measures attention, not learning.</p>
+    </div>
+  </div>
+
+  <div class="tier">
+    <div class="t-num">02 — Performance</div>
+    <div class="t-body">
+      <h4>Can the learner complete this task now?</h4>
+      <p>Turns to completion, how far the hint ladder had to escalate, whether L1 fallback was triggered.</p>
+    </div>
+  </div>
+
+  <div class="tier">
+    <div class="t-num">03 — Transfer</div>
+    <div class="t-body">
+      <h4>Can the learner do it somewhere else?</h4>
+      <p>Same grammar zone, different scenario and lexicon — doctor's appointment vs. asking a neighbour to lower the noise. Success in one familiar scenario does not, by itself, demonstrate transfer.</p>
+    </div>
+  </div>
+
+  <div class="principle" style="margin-top: 2rem;">
+    Review response quality alongside learner performance: a fluent AI response may still give
+    unsuitable language or support for the task.
+  </div>
+</section>
+
+<!-- ==========  04 — NoM TECHNIQUES  ========== -->
+<section>
+  <div class="section-tag">04 — The hint ladder</div>
+  <h2>Five repair moves when the learner stalls</h2>
+
+  <p>
+    The documented design proposes five
+    repair techniques informed by negotiation-of-meaning principles. A different technique
+    on each rung — three identical hints in a row is not a ladder.
+  </p>
+
+  <div class="nom">
+    <div class="nom-row">
+      <div class="id">T1</div>
+      <div class="name">Simpler synonym</div>
+      <div class="example">¿La tarjeta sanitaria?<span class="arrow">→</span>¿La tarjeta verde, la del médico?</div>
+    </div>
+    <div class="nom-row">
+      <div class="id">T2</div>
+      <div class="name">Concrete examples</div>
+      <div class="example">¿Cómo se llama?<span class="arrow">→</span>¿Iván? ¿María? ¿Pedro?</div>
+    </div>
+    <div class="nom-row">
+      <div class="id">T3</div>
+      <div class="name">Split the compound</div>
+      <div class="example">¿Nombre y apellidos?<span class="arrow">→</span>Primero el nombre.</div>
+    </div>
+    <div class="nom-row">
+      <div class="id">T4</div>
+      <div class="name">Close the question</div>
+      <div class="example">¿Cuándo?<span class="arrow">→</span>¿Hoy o mañana?</div>
+    </div>
+    <div class="nom-row">
+      <div class="id">T5</div>
+      <div class="name">Self-modelling</div>
+      <div class="example">¿Su nombre?<span class="arrow">→</span>Yo soy María. ¿Y usted?</div>
+    </div>
+  </div>
+
+  <p class="escalation">
+    Escalation: first attempt uses T1, T2, or T3 (open). Second attempt moves to T4 or T5 (more scaffolded).
+    Third attempt combines or models almost the full answer — still in character.
+  </p>
+</section>
+
+<!-- ==========  FOOTER  ========== -->
+<section><div class="section-tag">05 — Design trade-offs & next steps</div><h2>Improve response checks and recovery</h2><p><strong>Move from prompt instructions to automated checks.</strong> Word limits, character consistency, and language restrictions are intended behavior. The proposed validation layer would make selected requirements testable before a response reaches the learner.</p><p><strong>Handle variation in learner speech.</strong> Regex extraction can miss natural variation in names, times, and other details. I would add fallback steps that ask for clarification when essential information is unclear.</p><p><strong>Validate responses before audio playback.</strong> I would prioritize JSON schema checks and a recovery path for malformed model responses before passing them to text-to-speech.</p><p><strong>Evaluate learning separately.</strong> Response accuracy, language-level suitability, and transfer to a new task remain priorities for evaluation.</p></section>
+</main>
+<footer>
+  <a class="next-part" href="pedagogy-architecture.html">
+    <span class="kicker">&larr; Part 1 of 2 &middot; Start of the series</span>
+    <span class="title">The pedagogy that lives where the model isn't</span>
+  </a>
+  <div class="footer-links">
+    <a href="../#projects">&larr; Back to portfolio</a>
+    <a href="https://clases-con-xenia.com/app/">See the platform</a>
+    <a href="mailto:xenia13@protonmail.com">Get in touch</a>
+  </div>
+  <p>Architecture notes on a single feature inside a Spanish-learning app. Frameworks referenced: Long's Negotiation of Meaning; Lyster &amp; Ranta on corrective recasts; Krashen's affective filter; Swain's pushed output.</p>
+</footer>
+
+</body>
+</html>

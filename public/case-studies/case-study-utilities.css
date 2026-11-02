@@ -1,0 +1,4 @@
+.skip-link { position: fixed; top: -100px; left: 16px; z-index: 100; }
+.skip-link:focus { top: 16px; }
+section[id], header[id] { scroll-margin-top: 72px; }
+.platform-recording video { display: block; width: 100%; height: auto; }
