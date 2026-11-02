@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spanish Learning Platform — Pedagogy & Course-Delivery Notes | Ksenia Galaktionova</title>
+<meta name="description" content="Learning design in the Spanish Learning Platform: lesson sequences, independent practice, teacher authoring, feedback, and pedagogical trade-offs.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:          #FFFFFF;
+  --bg-soft:     #F7F7F5;
+  --ink:         #1A1A1A;
+  --ink-soft:    #4A4A4A;
+  --ink-fade:    #767676;
+  --rule:        #E5E5E2;
+  --rule-strong: #1A1A1A;
+  --accent:      #2A5A8A;   /* calm blue, not signal-red */
+
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+
+  --col: 42rem;
+  --col-wide: 60rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  font-feature-settings: "kern", "liga";
+}
+
+a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--bg-soft);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  color: var(--ink);
+}
+
+em { font-style: italic; }
+strong { font-weight: 600; }
+
+/* ==========  TOP NAV  ========== */
+.topnav {
+  max-width: var(--col-wide);
+  margin: 0 auto;
+  padding: 1.5rem 2rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--ink-fade);
+}
+.topnav a { color: var(--ink-soft); text-decoration: none; font-weight: 500; }
+.topnav a:hover { color: var(--accent); }
+.topnav .series { letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; font-size: 0.7rem; }
+
+/* ==========  HEADER  ========== */
+header {
+  max-width: var(--col-wide);
+  margin: 0 auto;
+  padding: 3.5rem 2rem 3rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.label {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-fade);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 2.1rem;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.2rem;
+  max-width: 36rem;
+}
+
+.subhead {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 42rem;
+}
+
+/* product / audience line */
+.context {
+  margin-top: 1.5rem;
+  padding: 1rem 1.2rem;
+  background: var(--bg-soft);
+  border-left: 3px solid var(--accent);
+  max-width: var(--col);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.context strong { color: var(--ink); }
+.context .row { display: block; }
+.context .row + .row { margin-top: 0.3rem; }
+.context .k {
+  display: inline-block;
+  min-width: 5.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2.5rem;
+  font-size: 0.85rem;
+  color: var(--ink-fade);
+}
+.meta span strong { color: var(--ink); font-weight: 500; margin-right: 0.5rem; }
+
+/* ==========  SECTIONS  ========== */
+section {
+  max-width: var(--col-wide);
+  margin: 0 auto;
+  padding: 4rem 2rem 2rem;
+}
+
+.section-tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+h2 {
+  font-size: 1.55rem;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.5rem;
+  max-width: 38rem;
+}
+
+h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-top: 2.5rem;
+  margin-bottom: 0.8rem;
+  color: var(--ink);
+}
+
+p {
+  margin-bottom: 1rem;
+  max-width: var(--col);
+  color: var(--ink-soft);
+}
+p strong { color: var(--ink); }
+
+.q {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ==========  CODE BLOCK  ========== */
+pre {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  line-height: 1.65;
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 1.1rem 1.3rem;
+  margin: 1.4rem 0;
+  max-width: var(--col);
+  overflow-x: auto;
+  color: var(--ink);
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+pre .c { color: var(--ink-fade); } /* comment */
+
+/* ==========  AI / DETERMINISTIC TABLE  ========== */
+.table {
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.t-head, .t-row {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 3.5fr;
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.t-head {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-fade);
+  font-weight: 600;
+  border-bottom: 1px solid var(--rule);
+}
+
+.t-row {
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.t-row:last-child { border-bottom: none; }
+
+.t-row .job { color: var(--ink); font-weight: 500; }
+.t-row .why { color: var(--ink-soft); }
+
+.badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+.badge.llm { background: var(--accent); color: white; }
+.badge.det { background: var(--ink); color: white; }
+
+.principle {
+  margin-top: 2rem;
+  padding: 1.2rem 1.4rem;
+  background: var(--bg-soft);
+  border-left: 3px solid var(--accent);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ink);
+  max-width: var(--col);
+}
+
+/* ==========  TIER LIST  ========== */
+.tier {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 1.5rem;
+  padding: 1.3rem 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+.tier:last-child { border-bottom: 1px solid var(--rule); }
+.tier .t-num {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+.tier .t-body h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+.tier .t-body p { font-size: 0.92rem; margin-bottom: 0; color: var(--ink-soft); max-width: 38rem; }
+
+/* ==========  LIMITATIONS  ========== */
+.limits { counter-reset: lim; margin-top: 1rem; }
+.limit {
+  padding: 1.4rem 0;
+  border-top: 1px solid var(--rule);
+  max-width: var(--col);
+}
+.limit:last-child { border-bottom: 1px solid var(--rule); }
+.limit h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+  counter-increment: lim;
+}
+.limit h4::before {
+  content: counter(lim) " ";
+  color: var(--accent);
+  font-family: var(--mono);
+  margin-right: 0.5rem;
+}
+.limit p { font-size: 0.92rem; margin-bottom: 0.4rem; }
+.limit .next { color: var(--ink); font-weight: 500; }
+
+/* ==========  THROUGHLINE  ========== */
+.throughline {
+  max-width: var(--col-wide);
+  margin: 2rem auto 0;
+  padding: 2.5rem 2rem;
+}
+.throughline p {
+  max-width: var(--col);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--ink);
+  border-left: 3px solid var(--accent);
+  padding-left: 1.4rem;
+}
+
+/* ==========  FOOTER  ========== */
+footer {
+  max-width: var(--col-wide);
+  margin: 4rem auto 0;
+  padding: 2rem 2rem 5rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.9rem;
+  color: var(--ink-fade);
+  line-height: 1.6;
+}
+.next-part {
+  display: block;
+  padding: 1.4rem 1.6rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  max-width: var(--col);
+}
+.next-part .kicker {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+.next-part .title { color: var(--ink); font-weight: 600; font-size: 1.05rem; margin-top: 0.3rem; }
+.footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+footer p { color: var(--ink-fade); max-width: var(--col); margin-bottom: 0.6rem; }
+
+/* ==========  MOBILE  ========== */
+@media (max-width: 720px) {
+  .topnav { padding: 1.2rem 1.5rem 0; }
+  header { padding: 2.5rem 1.5rem 2rem; }
+  section { padding: 3rem 1.5rem 1.5rem; }
+  .throughline { padding: 2rem 1.5rem; }
+  footer { padding: 2rem 1.5rem 3rem; }
+  h1 { font-size: 1.7rem; }
+  h2 { font-size: 1.35rem; }
+  pre { font-size: 0.74rem; }
+
+  .t-head, .t-row { grid-template-columns: 1fr; gap: 0.5rem; }
+  .t-head { display: none; }
+  .t-row { padding: 1.2rem 0; }
+  .t-row .why { font-size: 0.88rem; }
+
+  .tier { grid-template-columns: 1fr; gap: 0.5rem; }
+}
+</style>
+<link rel="canonical" href="https://xenia19.github.io/portfolio/case-studies/pedagogy-architecture.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spanish Learning Platform — Pedagogy & Course-Delivery Notes">
+<meta property="og:description" content="Learning design in the Spanish Learning Platform: lesson sequences, independent practice, teacher authoring, feedback, and pedagogical trade-offs.">
+<meta property="og:url" content="https://xenia19.github.io/portfolio/case-studies/pedagogy-architecture.html">
+<meta name="twitter:card" content="summary">
+<style>
+/* Shared accessibility and evidence context for retained architecture notes. */
+:root { --ink-fade: #595959; }
+html { scroll-padding-top: 2rem; }
+a:focus-visible { outline: 3px solid #b45309; outline-offset: 5px; }
+.skip-link { position: fixed; top: -100px; left: 16px; background: white; padding: 12px 20px; z-index: 100; }
+.skip-link:focus { top: 12px; }
+.evidence-note { border-left: 3px solid #4338ca; background: #eef2ff; padding: 18px 22px; margin-top: 24px; max-width: 44rem; font-size: .88rem; color: #334155; }
+.evidence-note p { font-size: inherit; margin: 0 0 10px; }
+.evidence-note p:last-child { margin: 0; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to design notes</a>
+
+<!-- ==========  TOP NAV  ========== -->
+<nav class="topnav">
+  <a href="../#projects">&larr; Back to portfolio</a>
+  <span class="series">Spanish Learning Platform &middot; Notes 1 of 2</span>
+</nav>
+
+<!-- ==========  HEADER  ========== -->
+<main id="main" tabindex="-1">
+<header>
+  <div class="label">Architecture notes</div>
+  <h1>The pedagogy that lives where the model isn't</h1>
+  <p class="subhead">
+    How learning design shapes a one-to-one Spanish teaching platform: lesson sequences,
+    independent practice, feedback, and teacher tools. These notes explore how pedagogical
+    decisions translate into the structure and behavior of a digital learning environment.
+  </p>
+
+  <div class="context">
+    <span class="row"><span class="k">Product</span> <strong>Spanish Learning Platform / Clases con Xenia</strong> — used in individual Spanish lessons and independent practice.</span>
+    <span class="row"><span class="k">For</span> a single teacher and her Russian-speaking expat students in Spain.</span>
+  </div>
+
+  <div class="meta">
+    <span><strong>Domain</strong>Second Language Acquisition</span>
+    <span><strong>Stack</strong>React &middot; Firestore &middot; PHP/LLM grader &middot; DeepSeek</span>
+    <span><strong>Reading time</strong>~5 minutes</span>
+  </div>
+<div class="evidence-note"><p><strong>Design notes · Spanish Learning Platform.</strong> A closer look at lesson delivery, feedback, and teacher oversight.</p><p>The <a href="spanish-platform.html">platform case study</a> describes the teaching context, work with approximately 20 students over more than one year, and priorities for evaluation.</p></div>
+</header>
+
+<!-- ==========  01  ========== -->
+<section>
+  <div class="section-tag">01 — What this system is</div>
+  <h2>Three surfaces around one live hour</h2>
+
+  <p>
+    A single teacher teaches Russian-speaking expats in Spain, one-on-one, online. This system
+    is everything around that live hour:
+  </p>
+  <p>
+    a <strong>lesson player</strong> the teacher drives on screen during the hour; a
+    <strong>homework runner</strong> the student does alone, between lessons; and a
+    <strong>teacher console</strong> that assigns work, reviews student work and machine feedback, and
+    shows where students fail.
+  </p>
+  <p>
+    These notes focus on the data-driven lesson structure: JavaScript objects organized around a shared schema and a runtime registry. The platform also includes teacher-facing tools for creating and editing lessons and activities, managing sequences, and assigning work.
+  </p>
+  <p>
+    The single most consequential decision sits at the top, and it is a decision <em>not</em> to
+    use AI. The lesson template states it directly — <em>"the AI conversation partner is not used
+    in the lesson; the live partner is the teacher."</em> <code>LessonPage</code> renders only
+    deterministic engines — flashcards, drills, dialogues, a mission graph — and never opens a chat
+    to a model.
+    This is a product decision as much as a pedagogical one: the student is paying for an hour of
+    a human, and the AI's job is not to imitate that human in the room. Its job is to extend the
+    teacher's reach into the homework the teacher cannot sit through. Everything below follows
+    from that boundary.
+  </p>
+</section>
+
+<!-- ==========  02  ========== -->
+<section>
+  <div class="section-tag">02 — Where the LLM is, and where it is gated out</div>
+  <h2>A wall of deterministic code in front of every model call</h2>
+
+  <p>
+    The system has exactly one server-side LLM seam — a PHP endpoint, <code>check.php</code>,
+    reached through <code>src/utils/api.js</code> — plus a Cloudflare Worker proxying DeepSeek for
+    chat. The interesting design is not where the model is called. It is the wall of deterministic
+    code in front of every call.
+  </p>
+  <p>
+    Grading runs as a cascade. <code>checkSingleTask</code> settles every closed question by
+    comparison, settles spelling by rule, and reaches the model only for free text that survived
+    both:
+  </p>
+
+  <pre><code><span class="c">// 1 · exact match, punctuation- and case-insensitive</span>
+if (strictUser === cleanTextStrict(cand)) return { status: 'correct' };
+
+<span class="c">// 2 · accent-insensitive match → a rule decides spelling vs. correct (see 03b)</span>
+if (cleanTextNoAccents(userAnswer) === cleanTextNoAccents(cand)) { /* ... */ }
+
+<span class="c">// 3 · only now, for fill_gap / translation, ask the model</span>
+return await checkTranslationWithAI(userAnswer, task.correct, task.context);</code></pre>
+
+  <p>
+    The consequence is that <code>matching</code>, <code>multiple_choice</code>,
+    <code>true_false</code>, <code>who_said</code> and reading-comprehension questions never reach
+    a model at all, and the common case — a correct answer — costs zero tokens and survives an
+    outage.
+  </p>
+
+  <div class="table">
+    <div class="t-head">
+      <div>The job</div>
+      <div>Done by</div>
+      <div>Why</div>
+    </div>
+    <div class="t-row">
+      <div class="job">Judge whether a free-text answer is acceptable</div>
+      <div><span class="badge llm">LLM</span></div>
+      <div class="why">Paraphrase and regional variants need semantic judgment; rigid matching kills them.</div>
+    </div>
+    <div class="t-row">
+      <div class="job">Review an open-ended essay</div>
+      <div><span class="badge llm">LLM</span></div>
+      <div class="why">Open production; no template covers it.</div>
+    </div>
+    <div class="t-row">
+      <div class="job">Match a closed answer (MC, matching, true/false)</div>
+      <div><span class="badge det">Code</span></div>
+      <div class="why">Equality. Zero latency, zero cost, no model needed.</div>
+    </div>
+    <div class="t-row">
+      <div class="job">Decide whether a missing accent is an error</div>
+      <div><span class="badge det">Code</span></div>
+      <div class="why">A finite linguistic rule, not a judgment call (see 03b).</div>
+    </div>
+    <div class="t-row">
+      <div class="job">Rank which tasks students fail most</div>
+      <div><span class="badge det">Code</span></div>
+      <div class="why">Arithmetic over submissions, not an "AI insight".</div>
+    </div>
+  </div>
+
+  <div class="principle">
+    Let the model do only what the model can; gate everything else. The homework's
+    chat-simulation task is the one place the model drives a conversation — and it is the homework
+    analogue of the voice tutor, documented in
+    <a href="voice-architecture.html">Part&nbsp;2</a>, not here.
+  </div>
+</section>
+
+<!-- ==========  03  ========== -->
+<section>
+  <div class="section-tag">03 — Three decisions that are pedagogy and engineering at once</div>
+  <h2>Each begins as a question a teacher would ask, and ends as a line of code</h2>
+
+  <h3>03a — Forgiving practice, strict tests</h3>
+  <p>
+    <span class="q">The question.</span> When the grader is unsure — a network blip, a malformed
+    model response — should the student get the benefit of the doubt?
+  </p>
+  <p>
+    <span class="q">The answer, in code.</span> It depends on the stakes, and the code says so in
+    two <code>catch</code> blocks. Homework grading fails <strong>open</strong>: when a call to
+    the grader throws, the student's answer is accepted — the comment in the code reads
+    <em>"so as not to punish the student for our failure."</em> The placement test fails
+    <strong>closed</strong>: the same shape of
+    <code>catch</code>, the opposite return value, so any gap the local check and the model both
+    leave unknown becomes an error, not a free pass.
+  </p>
+  <p>
+    This difference raises a pedagogical trade-off between continuity and assessment validity.
+    Accepting an answer during a service failure lets practice continue, but can give misleading
+    feedback. Rejecting an answer avoids awarding credit without a judgment, but can penalize a
+    learner for a technical problem. I would make an unavailable judgment explicit and flag it
+    for review in both contexts.
+  </p>
+
+  <h3>03b — Grading accents by what they mean, not by string distance</h3>
+  <p>
+    <span class="q">The question.</span> A student writes <code>hable</code> for <code>hablé</code>,
+    or <code>cafe</code> for <code>café</code>. Same number of characters wrong. Are they the same
+    mistake?
+  </p>
+  <p>
+    <span class="q">The answer, in code.</span> No — and the system encodes <em>why</em> not in a
+    model but in a table of Spanish homographs and one suffix rule:
+  </p>
+
+  <pre><code>const TILDE_HOMOGRAPHS = new Set([
+  'sí','tú','él','mí','té','sé','dé','más','aún',
+  'qué','cómo','dónde','cuándo','cuál','quién', <span class="c">/* … */</span>
+]);
+
+const tildeIsCritical = (c) =&gt; {
+  if (TILDE_HOMOGRAPHS.has(c)) return true;
+  if (/[éíó]$/.test(c) &amp;&amp; c.length &gt;= 3) return true;  <span class="c">// hablé, comió, viví</span>
+  return false;
+};</code></pre>
+
+  <p>
+    <code>café</code> and <code>también</code> lose nothing; their accent is orthographic.
+    <code>hablé</code> versus <code>hable</code> — preterite versus subjunctive — costs half
+    credit, because dropping the accent changed the grammar. This is error gravity: feedback
+    weight tracks communicative cost, not orthographic perfection. There is no separate "pedagogy
+    layer" deciding the tilde matters; the homograph set <em>is</em> the pedagogy, and it runs
+    before any model is consulted.
+  </p>
+
+  <h3>03c — The machine grade is provisional; the teacher is the arbiter</h3>
+  <p>
+    <span class="q">The question.</span> Who has the last word on a grade — the machine, or the
+    human?
+  </p>
+  <p>
+    <span class="q">The answer, in code.</span> The human, structurally. The console lets the
+    teacher overturn any machine verdict, and the data model is built to expect it. The machine's
+    verdict is never discarded — it is preserved as <code>originalStatus</code> while the displayed
+    grade flips and the score recomputes. The level-skip path does the same at coarser grain: the
+    teacher convalidates a whole CEFR level while preserving every real attempt.
+  </p>
+  <p>
+    This closes a loop with 03a. Fail-open grading — accepting on doubt — is only defensible
+    <em>because</em> this human backstop exists. The model is allowed to be lenient and
+    occasionally wrong precisely because it is not the final authority; a teacher reviews and
+    corrects, and the code carries the seam (<code>originalStatus</code>) that keeps the
+    original judgment available for comparison. This makes teacher review part of the assessment
+    workflow.
+  </p>
+</section>
+
+<!-- ==========  04  ========== -->
+<section>
+  <div class="section-tag">04 — Decisions encoded structurally</div>
+  <h2>Some decisions live in the shape of the data, not in a function</h2>
+
+  <p>
+    <strong>Tab order is an acquisition sequence.</strong> <code>LessonPage</code> renders a fixed
+    array of tabs — diagnostic → recognition → controlled practice → spaced retrieval → bridge to
+    production → communicative → transfer → exit ticket — regardless of the order the author wrote
+    them. The author cannot accidentally put free production before recognition; the gradient from
+    maximum support to minimum is enforced by render order, not by discipline.
+  </p>
+  <p>
+    <strong><code>conceptId</code> is the spine.</strong> Lessons declare what they
+    <code>introduce</code> and what they <code>prerequisite</code>; a runtime index builds a
+    <code>Map&lt;conceptId, items[]&gt;</code> across every lesson, and the warm-up pulls retrieval
+    items from prerequisite concepts taught in <em>earlier</em> lessons. Interleaving across
+    lessons is a property of the data graph, not of any one lesson.
+  </p>
+  <p>
+    <strong>Authoring for a target-language environment.</strong> The authoring conventions call for hidden translations and limited use of Russian in designated support slots. These are content-design guidelines; automated enforcement is an improvement to explore.
+  </p>
+</section>
+
+<!-- ==========  05  ========== -->
+<section>
+  <div class="section-tag">05 — Three tiers of evidence</div>
+  <h2>Distinguishing participation, performance, and transfer</h2>
+
+  <div class="tier">
+    <div class="t-num">01 — Engagement</div>
+    <div class="t-body">
+      <h4>Did the student do the work? — Recorded.</h4>
+      <p>Per-tab progress and submission completion land in Firestore. This is the
+      best-instrumented tier, and it measures attention, not learning: for passive tabs the only
+      signal is that the tab was opened.</p>
+    </div>
+  </div>
+  <div class="tier">
+    <div class="t-num">02 — Performance</div>
+    <div class="t-body">
+      <h4>Can the student do the task now? — Partly recorded.</h4>
+      <p>Submission scores and the console's error analytics are real: every submission aggregates
+      into error-rate-per-task and average-score-per-homework. The exit ticket re-runs the
+      diagnostic items and shows a delta — but it re-runs the <em>same</em> items (so it is
+      Performance, not Transfer), and it lives in <code>localStorage</code>, visible to the student
+      only; the console never sees it.</p>
+    </div>
+  </div>
+  <div class="tier">
+    <div class="t-num">03 — Transfer</div>
+    <div class="t-body">
+      <h4>Can the student do it somewhere else? — Designed for, not measured.</h4>
+      <p>The <code>conceptId</code> spine is precisely a transfer scaffold — the same concept is
+      required to resurface in a later lesson's warm-up, in a different engine, with different
+      lexicon. But warm-up performance is not recorded, and nothing aggregates whether a concept
+      introduced in lesson N is still retrievable in lesson N+3. The architecture is shaped for
+      transfer; evaluating it would require new tasks and later follow-up.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==========  06  ========== -->
+<section>
+  <div class="section-tag">06 — Design trade-offs & next steps</div>
+  <h2>Improve scheduling, authoring clarity, and feedback</h2>
+
+  <div class="limits">
+    <div class="limit">
+      <h4>Lesson warm-ups need a spacing schedule.</h4>
+      <p>The warm-up mixes prerequisite concepts through seeded random sampling, without using
+      time intervals or the student's error history. The documented vocabulary design uses a
+      Leitner review approach; extending scheduled review to lesson warm-ups is a separate next step.</p>
+      <p class="next">Next move: a per-concept <code>lastSeen</code> timestamp, and a scheduler
+      that picks warm-up items by interval rather than by sampling.</p>
+    </div>
+    <div class="limit">
+      <h4>Authoring guidance needs a clearer boundary.</h4>
+      <p>The chat-scenario template combines fields that control the activity with fields used
+      only as planning guidance. This can make authoring confusing: changing a planning field
+      does not change the learner experience.</p>
+      <p class="next">Next move: connect relevant fields to prompt assembly and move planning-only
+      guidance into clearly labeled authoring documentation.</p>
+    </div>
+    <div class="limit">
+      <h4>The grader has no constraint layer, and fail-open can teach the wrong thing.</h4>
+      <p>The <a href="voice-architecture.html">voice tutor notes</a> propose a response checklist.
+      A similar validation step would help the homework grader, which accepts answers when the
+      grading service fails. Teacher review provides a way to correct these judgments, but a
+      learner may encounter misleading feedback before that review takes place.</p>
+      <p class="next">Next move: a confidence/constraint layer that flags low-confidence and
+      fail-open grades for review instead of passing them through as correct.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==========  THROUGHLINE  ========== -->
+<div class="throughline">
+  <p>
+    The throughline: in the parts of this system where there is no model, there is no separate
+    pedagogy layer either. The acquisition sequence is the tab array. The error-gravity policy is a
+    homograph set. The formative/summative line is two <code>catch</code> blocks. The decisions
+    were made once, and they are visible from both sides.
+  </p>
+</div>
+
+<!-- ==========  FOOTER  ========== -->
+</main>
+<footer>
+  <a class="next-part" href="voice-architecture.html">
+    <span class="kicker">Part 2 of 2 &middot; Continue the series &rarr;</span>
+    <span class="title">Voice Call Tutor — where AI helps, and where it must not</span>
+  </a>
+  <div class="footer-links">
+    <a href="../#projects">&larr; Back to portfolio</a>
+    <a href="https://clases-con-xenia.com/app/">See the platform</a>
+    <a href="mailto:xenia13@protonmail.com">Get in touch</a>
+  </div>
+</footer>
+
+</body>
+</html>
