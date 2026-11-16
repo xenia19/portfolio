@@ -11,7 +11,7 @@ const projects = [{
   title: 'Spanish Learning Platform',
   subtitle: 'Personalized & interactive learning',
   status: 'Used in my teaching practice',
-  description: 'A platform I designed and developed for individual Spanish lessons and independent practice between them. Approximately 20 students have used it over more than one year.',
+  description: 'A platform I designed and developed for individual Spanish lessons and independent practice between them. Approximately 50 students have used it over more than one year.',
   contribution: 'I defined the learning requirements, activities, personalized paths, and teacher workflows. Development involved substantial AI-assisted coding.',
   tags: ['Learning paths', 'Teacher authoring', 'Selected AI feedback'],
   video: 'passport-demo.mp4',
@@ -126,7 +126,7 @@ function App() {
             <p className="inline-flex items-center gap-2 px-4 py-2 mb-8 text-sm font-bold tracking-widest text-indigo-700 uppercase bg-indigo-50 border border-indigo-100 rounded-full"><span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>Adult Learning & Digital Learning Design</p>
             <h1 className="text-5xl lg:text-7xl font-extrabold text-slate-900 mb-6 leading-[1.1]">Learning experiences<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">grounded in pedagogy.</span></h1>
             <p className="text-xl text-slate-600 mb-8 leading-relaxed max-w-lg">I’m Ksenia Galaktionova. I bring 14+ years in adult language education to the design of interactive digital learning experiences, with AI integrated into selected learning workflows.</p>
-            <p className="mb-10 border-l-4 border-indigo-500 pl-6 text-slate-600 leading-relaxed">I designed and developed a Spanish-learning platform used with approximately 20 real students over more than one year.</p>
+            <p className="mb-10 border-l-4 border-indigo-500 pl-6 text-slate-600 leading-relaxed">I designed and developed a Spanish-learning platform used with approximately 50 real students over more than one year.</p>
             <div className="flex flex-col sm:flex-row gap-4"><a href="#projects" className="px-8 py-4 bg-slate-900 text-white rounded-xl font-bold hover:bg-slate-800 transition shadow-xl shadow-slate-300 transform hover:-translate-y-1 text-center">Explore my work </a><a href={linkedin} className="px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-xl font-bold hover:bg-slate-50 transition flex items-center justify-center gap-2">LinkedIn <ArrowUpRight size={18} aria-hidden="true" /></a></div>
             <p className="text-sm text-slate-500 mt-6 flex items-center gap-2"><MapPin size={16} aria-hidden="true" /> Palermo, Italy · Eligible to work in Italy</p>
           </Motion.div>
